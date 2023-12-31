@@ -4,10 +4,10 @@
     "slug": "stock-app",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/building.png",
+    "icon": "./src/assets/images/building.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/images/building.png",
+      "image": "./src/assets/images/building.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -19,12 +19,12 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./src/assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       }
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./src/assets/favicon.png"
     }
   }
 }

@@ -8,14 +8,14 @@
     "strict": true,
     "skipLibCheck": true,
     "sourceMap": true,
+
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
     "baseUrl": "./src",
     "paths": {
       "@core/*": ["core/*"],
       "@assets/*": ["assets/*"],
-      "@components/*": ["components/*"],
-      // "@atomic": ["./atomic"],
-      // "@atomic/*": ["./atomic/*"],
-      // "test-utils": ["../testing/utils"],
+      "@components/*": ["components/*"]
     }
   },
   "include": ["**/*.ts", "**/*.tsx"]

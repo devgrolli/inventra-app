@@ -4,17 +4,12 @@ import {
   ScrollView,
   View,
   Image,
-  TouchableOpacity,
-  TextInput,
-  Button,
-  SafeAreaView,
   Text,
   Dimensions,
 } from "react-native";
-
 import { DSButton } from "@core/ds/Button";
 import { Snackbar } from "react-native-paper";
-import { Logo } from "@assets/images/Login-logo.png";
+import Logo from "@assets/images/Login-logo.png";
 
 import * as S from "./styles";
 const screenHeight = Dimensions.get("window").height;
@@ -26,7 +21,6 @@ export default function Login() {
   const [text, onChangeText] = useState("Useless Text");
   const [number, onChangeNumber] = useState("");
   const handleLogin = () => {};
-  const handleChange = () => {};
   const handleSubmit = () => {};
 
   const [visible, setVisible] = useState(false);
@@ -45,7 +39,7 @@ export default function Login() {
 
   return (
     <>
-      <ScrollView>
+      <ScrollView style={{ flex: 1 }}>
         <View style={{ alignItems: "center" }}>
           <Image source={Logo} />
           <S.LabelLogo>
@@ -56,21 +50,14 @@ export default function Login() {
         <View style={{ padding: 20 }}>
           <S.Input
             hasError={error}
-            // defaultValue={"uaheuhaeuahe"}
             placeholder="E-mail"
-            // value={"uaehua"}
-            onChangeText={handleChange}
             onSubmitEditing={handleSubmit}
             keyboardType="numeric"
-            returnKeyType="done"
             maxLength={9}
           />
           <S.Input
             hasError={error}
-            // defaultValue={"uaheuhaeuahe"}
             placeholder="Senha"
-            // value={"uaehua"}
-            onChangeText={handleChange}
             onSubmitEditing={handleSubmit}
             keyboardType="numeric"
           />
