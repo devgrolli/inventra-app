@@ -15,6 +15,7 @@
     "paths": {
       "@core/*": ["core/*"],
       "@assets/*": ["assets/*"],
+      "@screens/*": ["screens/*"],
       "@components/*": ["components/*"]
     }
   },

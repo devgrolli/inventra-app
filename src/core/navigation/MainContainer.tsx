@@ -4,11 +4,11 @@ import { FontAwesome } from "@expo/vector-icons"; // Certifique-se de ter o paco
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
-import Profile from "../../screens/Profile";
-import Home from "../../screens/Home";
-import Login from "../../screens/Login";
-import Teste from "../../screens/Teste";
-import Stock from "../../screens/Stock";
+import Home from "@screens/Home";
+import Login from "@screens/Login";
+import Teste from "@screens/Teste";
+import Stock from "@screens/Stock";
+import Profile from "@screens/Profile";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
