@@ -31,10 +31,12 @@ export default function Login() {
 
   const handleTestError = () => {
     setError(true);
+    setLoading(true);
   };
 
   const cleanErrors = () => {
     setError(false);
+    setLoading(false);
   };
 
   return (
@@ -52,21 +54,21 @@ export default function Login() {
             hasError={error}
             placeholder="E-mail"
             onSubmitEditing={handleSubmit}
-            keyboardType="numeric"
-            maxLength={9}
+            keyboardType="email-address"
           />
           <S.Input
             hasError={error}
             placeholder="Senha"
             onSubmitEditing={handleSubmit}
-            keyboardType="numeric"
+            secureTextEntry
           />
 
           <View style={{ alignItems: "center", paddingTop: 10 }}>
             <DSButton
+              loading={loading}
               onPress={handleTestError}
               name="Entrar"
-              typeButton="secundary"
+              typeButton="primary"
             />
           </View>
         </View>
