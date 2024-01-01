@@ -1,43 +1,20 @@
-import React, { useState } from "react";
-import {
-  StyleSheet,
-  ScrollView,
-  View,
-  Image,
-  Text,
-  Dimensions,
-} from "react-native";
+import React from "react";
+import { StyleSheet, ScrollView, View, Image, Text } from "react-native";
 import { DSButton } from "@core/ds/Button";
 import { Snackbar } from "react-native-paper";
 import Logo from "@assets/images/Login-logo.png";
-
 import * as S from "./styles";
-const screenHeight = Dimensions.get("window").height;
+import { useLogin } from "./useLogin";
 
 export default function Login() {
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
-
-  const [text, onChangeText] = useState("Useless Text");
-  const [number, onChangeNumber] = useState("");
-  const handleLogin = () => {};
-  const handleSubmit = () => {};
-
-  const [visible, setVisible] = useState(false);
-
-  const onToggleSnackBar = () => setVisible(!visible);
-
-  const onDismissSnackBar = () => setVisible(false);
-
-  const handleTestError = () => {
-    setError(true);
-    setLoading(true);
-  };
-
-  const cleanErrors = () => {
-    setError(false);
-    setLoading(false);
-  };
+  const {
+    error,
+    loading,
+    cleanErrors,
+    handleTestError,
+    handleSubmit,
+    onDismissSnackBar,
+  } = useLogin();
 
   return (
     <>
