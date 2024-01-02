@@ -2,9 +2,9 @@ import { TextInput } from "react-native";
 import styled from "styled-components/native";
 import { Colors } from "@core/constants/colors";
 
-export interface ErrorProps {
+export interface InputProps {
   hasError?: boolean;
-  // height?: number;
+  isFocused?: boolean;
 }
 
 export const ViewCard = styled.View`
@@ -22,11 +22,11 @@ export const Container = styled.View`
   justify-content: "center";
 `;
 
-export const Input = styled(TextInput)<ErrorProps>`
+export const Input = styled(TextInput)<InputProps>`
   flex: 1;
   border-radius: 10px;
-  border-color: ${({ hasError }: ErrorProps) =>
-    hasError ? Colors.orange : Colors.grey};
+  border-color: ${({ hasError, isFocused }: InputProps) =>
+    hasError ? Colors.orange : isFocused ? Colors.blue : Colors.grey};
   height: 50px;
   margin: 12px;
   border-width: 2px;
@@ -60,7 +60,6 @@ export const Label2 = styled.Text`
   color: ${Colors.blue};
   align-items: center;
   text-align: center;
-  /* font-family: "'OpenSans_400Regular'"; */
   font-size: 30px;
   font-weight: 900;
 `;

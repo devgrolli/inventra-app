@@ -1,68 +1,104 @@
-import React from "react";
-import { StyleSheet, ScrollView, View, Image, Text } from "react-native";
+import React, { useCallback } from "react";
+import {
+  StyleSheet,
+  ScrollView,
+  KeyboardAvoidingView,
+  Platform,
+  View,
+  Image,
+  Text,
+} from "react-native";
+import { getStatusBarHeight } from "react-native-iphone-screen-helper";
+import { CommonString } from "@core/constants/strings";
 import { DSButton } from "@core/ds/Button";
 import { Snackbar } from "react-native-paper";
 import Logo from "@assets/images/Login-logo.png";
-import * as S from "./styles";
 import { useLogin } from "./useLogin";
+import * as S from "./styles";
 
 export default function Login() {
   const {
     error,
     loading,
+    emailFocused,
+    passwordFocused,
+    handleBlur,
     cleanErrors,
-    handleTestError,
     handleSubmit,
+    handleTestError,
     onDismissSnackBar,
+    handleEmailFocus,
+    handlePasswordFocus,
   } = useLogin();
+
+  const getKeyboardVerticalOffset = useCallback(() => {
+    const statusBarHeight = getStatusBarHeight();
+    const { navigationTitleHeight, searchBarHeight } = CommonString.dimension;
+
+    return Platform.OS === "ios"
+      ? 120
+      : (statusBarHeight + navigationTitleHeight + searchBarHeight) * -1;
+  }, []);
 
   return (
     <>
-      <ScrollView style={{ flex: 1 }}>
-        <View style={{ alignItems: "center" }}>
-          <Image source={Logo} />
-          <S.LabelLogo>
-            App <S.Label2> Stock</S.Label2>
-          </S.LabelLogo>
-        </View>
-
-        <View style={{ padding: 20 }}>
-          <S.Input
-            hasError={error}
-            placeholder="E-mail"
-            onSubmitEditing={handleSubmit}
-            keyboardType="email-address"
-          />
-          <S.Input
-            hasError={error}
-            placeholder="Senha"
-            onSubmitEditing={handleSubmit}
-            secureTextEntry
-          />
-
-          <View style={{ alignItems: "center", paddingTop: 10 }}>
-            <DSButton
-              loading={loading}
-              onPress={handleTestError}
-              name="Entrar"
-              typeButton="primary"
-            />
-          </View>
-        </View>
-      </ScrollView>
-
-      <Snackbar
-        style={styles.toast}
-        visible={error}
-        onDismiss={onDismissSnackBar}
-        action={{
-          label: "Fechar",
-          textColor: "#ffff",
-          onPress: cleanErrors,
-        }}
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={{ flex: 1 }}
+        keyboardVerticalOffset={getKeyboardVerticalOffset()}
       >
-        <Text style={styles.textToast}>Usuário/senha inválidos</Text>
-      </Snackbar>
+        <ScrollView style={{ flex: 1 }}>
+          <View style={{ alignItems: "center" }}>
+            <Image source={Logo} />
+            <S.LabelLogo>
+              App <S.Label2> Stock</S.Label2>
+            </S.LabelLogo>
+          </View>
+
+          <View style={{ padding: 20 }}>
+            <S.Input
+              hasError={error}
+              placeholder="E-mail"
+              isFocused={emailFocused}
+              onFocus={handleEmailFocus}
+              onBlur={handleBlur}
+              onSubmitEditing={handleSubmit}
+              keyboardType="email-address"
+            />
+            <S.Input
+              hasError={error}
+              placeholder="Senha"
+              onSubmitEditing={handleSubmit}
+              isFocused={passwordFocused}
+              onFocus={handlePasswordFocus}
+              onBlur={handleBlur}
+              secureTextEntry
+            />
+
+            <View style={{ alignItems: "center", paddingTop: 10 }}>
+              <DSButton
+                loading={loading}
+                onPress={handleTestError}
+                name="Entrar"
+                typeButton="primary"
+              />
+            </View>
+          </View>
+        </ScrollView>
+
+        <Snackbar
+          style={styles.toast}
+          visible={error}
+          onDismiss={onDismissSnackBar}
+          action={{
+            label: "Fechar",
+            textColor: "#ffff",
+            onPress: cleanErrors,
+          }}
+        >
+          <Text style={styles.textToast}>Usuário/senha inválidos</Text>
+        </Snackbar>
+      </KeyboardAvoidingView>
     </>
   );
 }
