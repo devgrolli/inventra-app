@@ -4,8 +4,8 @@ import { Colors } from "@core/constants/colors";
 
 export const CardView = styled.View`
   background-color: ${Colors.white};
-  height: ${Dimensions.get('window').width * 0.75};
-  width: ${Dimensions.get('window').width * 0.45};
+  height: ${Dimensions.get('window').width * 0.30};
+  width: ${Dimensions.get('window').width * 0.25};
   margin: 8px;
   border-radius: 10px;
   align-items: center;
@@ -18,6 +18,13 @@ export const CardView = styled.View`
 `;
 
 export const ImageStyled = styled.Image`
-  height: 120px;
-  width: 120px;
+  height: 50px;
+  width: 50px;
+`;
+
+export const LabelsHome = styled.Text`
+  padding-top: 20px;
+  color: ${Colors.black};
+  font-weight: 600;
+  letter-spacing: 0.25;
 `;
