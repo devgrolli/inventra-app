@@ -18,8 +18,8 @@ export const CardView = styled.View`
 `;
 
 export const ImageStyled = styled.Image`
-  height: 50px;
-  width: 50px;
+  height: 60px;
+  width: 60px;
 `;
 
 export const LabelsHome = styled.Text`
