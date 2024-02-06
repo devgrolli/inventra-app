@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { View, Text } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
+import { Card } from "@screens/Home/components/Card";
 import User from "@assets/images/users.png";
 import Lucros from "@assets/images/lucros.png";
 import Moviment from "@assets/images/movement.png";
 import Basket from "@assets/images/basket.png";
 import Loss from "@assets/images/loss.png";
 import Relatorio from "@assets/images/relatorio.png";
-import { Card } from "@components/Card";
 
 export default function HomeScreen() {
   const [loading, setLoading] = useState(false);
@@ -33,7 +33,7 @@ export default function HomeScreen() {
           <Card
             loading={loading}
             img={Basket}
-            navigateRoute="Teste"
+            navigateRoute="Stock"
             nameLabel="Estoque"
           />
           <Card

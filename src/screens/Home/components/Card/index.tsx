@@ -1,5 +1,5 @@
 import { TouchableOpacity, Text } from "react-native";
-import { Loading } from "../Loading";
+import { Loading } from "../../../../components/Loading";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { useNavigation, ParamListBase } from "@react-navigation/native";
 import { Skeleton } from "moti/skeleton";

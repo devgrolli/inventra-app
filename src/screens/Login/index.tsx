@@ -41,65 +41,63 @@ export default function Login() {
   }, []);
 
   return (
-    <>
-      <KeyboardAvoidingView
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
-        style={{ flex: 1 }}
-        keyboardVerticalOffset={getKeyboardVerticalOffset()}
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={{ flex: 1 }}
+      keyboardVerticalOffset={getKeyboardVerticalOffset()}
+    >
+      <ScrollView style={{ flex: 1 }}>
+        <View style={{ alignItems: "center" }}>
+          <Image source={Logo} />
+          <S.LabelLogo>
+            App <S.Label2> Stock</S.Label2>
+          </S.LabelLogo>
+        </View>
+
+        <View style={{ padding: 20 }}>
+          <S.Input
+            hasError={error}
+            isFocused={emailFocused}
+            placeholder="E-mail"
+            onBlur={handleBlur}
+            onFocus={handleEmailFocus}
+            onSubmitEditing={handleSubmit}
+            keyboardType="email-address"
+          />
+          <S.Input
+            hasError={error}
+            isFocused={passwordFocused}
+            placeholder="Senha"
+            onBlur={handleBlur}
+            onFocus={handlePasswordFocus}
+            onSubmitEditing={handleSubmit}
+            secureTextEntry
+          />
+
+          <View style={{ alignItems: "center", paddingTop: 10 }}>
+            <DSButton
+              loading={loading}
+              onPress={handleTestError}
+              name="Entrar"
+              typeButton="primary"
+            />
+          </View>
+        </View>
+      </ScrollView>
+
+      <Snackbar
+        style={styles.toast}
+        visible={error}
+        onDismiss={onDismissSnackBar}
+        action={{
+          label: "Fechar",
+          textColor: "#ffff",
+          onPress: cleanErrors,
+        }}
       >
-        <ScrollView style={{ flex: 1 }}>
-          <View style={{ alignItems: "center" }}>
-            <Image source={Logo} />
-            <S.LabelLogo>
-              App <S.Label2> Stock</S.Label2>
-            </S.LabelLogo>
-          </View>
-
-          <View style={{ padding: 20 }}>
-            <S.Input
-              hasError={error}
-              placeholder="E-mail"
-              isFocused={emailFocused}
-              onFocus={handleEmailFocus}
-              onBlur={handleBlur}
-              onSubmitEditing={handleSubmit}
-              keyboardType="email-address"
-            />
-            <S.Input
-              hasError={error}
-              placeholder="Senha"
-              onSubmitEditing={handleSubmit}
-              isFocused={passwordFocused}
-              onFocus={handlePasswordFocus}
-              onBlur={handleBlur}
-              secureTextEntry
-            />
-
-            <View style={{ alignItems: "center", paddingTop: 10 }}>
-              <DSButton
-                loading={loading}
-                onPress={handleTestError}
-                name="Entrar"
-                typeButton="primary"
-              />
-            </View>
-          </View>
-        </ScrollView>
-
-        <Snackbar
-          style={styles.toast}
-          visible={error}
-          onDismiss={onDismissSnackBar}
-          action={{
-            label: "Fechar",
-            textColor: "#ffff",
-            onPress: cleanErrors,
-          }}
-        >
-          <Text style={styles.textToast}>Usuário/senha inválidos</Text>
-        </Snackbar>
-      </KeyboardAvoidingView>
-    </>
+        <Text style={styles.textToast}>Usuário/senha inválidos</Text>
+      </Snackbar>
+    </KeyboardAvoidingView>
   );
 }
 
