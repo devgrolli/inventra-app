@@ -1,27 +1,30 @@
-import React, { useCallback } from "react";
+import React from "react";
 import {
-  StyleSheet,
-  ScrollView,
-  KeyboardAvoidingView,
-  Platform,
   View,
   Image,
-  Text,
+  Platform,
+  ScrollView,
+  KeyboardAvoidingView,
 } from "react-native";
-import { getStatusBarHeight } from "react-native-iphone-screen-helper";
-import { CommonString } from "@core/constants/strings";
 import { DSButton } from "@core/ds/Button";
 import { Snackbar } from "react-native-paper";
-import Logo from "@assets/images/Login-logo.png";
 import { useLogin } from "./useLogin";
+import { Colors } from "@core/constants/colors";
+import Logo from "@assets/images/Login-logo.png";
 import * as S from "./styles";
 
 export default function Login() {
   const {
     error,
     loading,
+    email,
+    msgError,
+    password,
     emailFocused,
     passwordFocused,
+    getKeyboardVerticalOffset,
+    setEmail,
+    setPassword,
     handleBlur,
     cleanErrors,
     handleSubmit,
@@ -31,19 +34,10 @@ export default function Login() {
     handlePasswordFocus,
   } = useLogin();
 
-  const getKeyboardVerticalOffset = useCallback(() => {
-    const statusBarHeight = getStatusBarHeight();
-    const { navigationTitleHeight, searchBarHeight } = CommonString.dimension;
-
-    return Platform.OS === "ios"
-      ? 120
-      : (statusBarHeight + navigationTitleHeight + searchBarHeight) * -1;
-  }, []);
-
   return (
     <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
       style={{ flex: 1 }}
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
       keyboardVerticalOffset={getKeyboardVerticalOffset()}
     >
       <ScrollView style={{ flex: 1 }}>
@@ -56,6 +50,8 @@ export default function Login() {
 
         <View style={{ padding: 20 }}>
           <S.Input
+            onChangeText={(text) => setEmail(text)}
+            value={email}
             hasError={error}
             isFocused={emailFocused}
             placeholder="E-mail"
@@ -65,6 +61,8 @@ export default function Login() {
             keyboardType="email-address"
           />
           <S.Input
+            onChangeText={(text) => setPassword(text)}
+            value={password}
             hasError={error}
             isFocused={passwordFocused}
             placeholder="Senha"
@@ -77,7 +75,7 @@ export default function Login() {
           <View style={{ alignItems: "center", paddingTop: 10 }}>
             <DSButton
               loading={loading}
-              onPress={handleTestError}
+              onPress={handleSubmit}
               name="Entrar"
               typeButton="primary"
             />
@@ -86,37 +84,26 @@ export default function Login() {
       </ScrollView>
 
       <Snackbar
-        style={styles.toast}
+        style={{
+          left: 0,
+          right: 0,
+          bottom: 0,
+          height: 60,
+          borderRadius: 10,
+          position: "absolute",
+          alignItems: "center",
+          backgroundColor: Colors.orange,
+        }}
         visible={error}
         onDismiss={onDismissSnackBar}
         action={{
           label: "Fechar",
-          textColor: "#ffff",
+          textColor: Colors.white,
           onPress: cleanErrors,
         }}
       >
-        <Text style={styles.textToast}>Usuário/senha inválidos</Text>
+        <S.textToast>{msgError}</S.textToast>
       </Snackbar>
     </KeyboardAvoidingView>
   );
 }
-
-const styles = StyleSheet.create({
-  toast: {
-    backgroundColor: "#fd5025",
-    color: "#ffff",
-    height: 60,
-    textAlign: "center",
-    alignItems: "center",
-    borderRadius: 10,
-    position: "absolute",
-    bottom: 0,
-    left: 0,
-    right: 0,
-  },
-  textToast: {
-    letterSpacing: 0.5,
-    color: "#ffffff",
-    fontWeight: "400",
-  },
-});

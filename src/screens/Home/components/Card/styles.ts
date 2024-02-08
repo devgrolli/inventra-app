@@ -4,7 +4,7 @@ import { Colors } from "@core/constants/colors";
 
 export const CardView = styled.View`
   background-color: ${Colors.white};
-  height: ${Dimensions.get('window').width * 0.30};
+  height: ${Dimensions.get('window').width * 0.25};
   width: ${Dimensions.get('window').width * 0.25};
   margin: 8px;
   border-radius: 10px;
@@ -24,7 +24,7 @@ export const ImageStyled = styled.Image`
 
 export const LabelsHome = styled.Text`
   padding-top: 20px;
-  color: ${Colors.black};
+  color: ${Colors.blue};
   font-weight: 600;
   letter-spacing: 0.25;
 `;

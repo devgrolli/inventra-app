@@ -1,20 +1,20 @@
 import * as React from "react";
 import { FontAwesome } from "@expo/vector-icons"; // Certifique-se de ter o pacote de ícones instalado
-
+import { Colors } from "@core/constants/colors";
+import { CommonString } from "@core/constants/strings";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
-import Header from "@components/Header";
 import Home from "@screens/Home";
 import Login from "@screens/Login";
 import Teste from "@screens/Teste";
 import Stock from "@screens/Stock";
 import Profile from "@screens/Profile";
-import { Colors } from "@core/constants/colors";
+import ButtonUser from "@components/Header/ButtonUser";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
-
+const size = CommonString.sizeIcons.footer;
 const isLogged = false;
 
 const optionsHeader = {
@@ -30,9 +30,6 @@ function LoginStack() {
         name="Home"
         component={Home}
         options={{
-          headerStyle: {
-            backgroundColor: "#00ffd0",
-          },
           headerShown: false,
           gestureEnabled: true,
         }}
@@ -60,13 +57,45 @@ function LoginStack() {
   );
 }
 
+function footerLogged() {
+  if (isLogged) {
+    return (
+      <Tab.Screen
+        key="Profile"
+        name="Profile"
+        component={Profile}
+        options={{
+          tabBarLabel: "Perfil",
+          tabBarIcon: ({ color }) => (
+            <FontAwesome name="user-circle-o" size={size} color={color} />
+          ),
+        }}
+      />
+    );
+  }
+
+  return (
+    <Tab.Screen
+      key="Login"
+      name="Login"
+      component={Login}
+      options={{
+        tabBarLabel: "Menu",
+        tabBarIcon: ({ color }) => (
+          <FontAwesome name="bars" size={size} color={color} />
+        ),
+      }}
+    />
+  );
+}
+
 export function GlobalNavigation() {
   return (
     <Tab.Navigator
       initialRouteName="Home"
       screenOptions={{
-        tabBarActiveTintColor: "#80B3FF",
-        tabBarInactiveTintColor: "#9f9f9f",
+        tabBarActiveTintColor: Colors.blue,
+        tabBarInactiveTintColor: Colors.grey,
       }}
     >
       <Tab.Screen
@@ -75,15 +104,16 @@ export function GlobalNavigation() {
         options={{
           tabBarLabel: "Início",
           headerStyle: {
-            backgroundColor: "#80B3FF",
-            height: 150,
+            height: 180,
+            backgroundColor: Colors.blue,
             borderBottomRightRadius: 30,
             borderBottomLeftRadius: 30,
           },
           headerShown: true,
           tabBarIcon: ({ color }) => (
-            <FontAwesome name="home" size={22} color={color} />
+            <FontAwesome name="home" size={size} color={color} />
           ),
+          headerLeft: () => <ButtonUser />,
         }}
       />
       <Tab.Screen
@@ -92,33 +122,12 @@ export function GlobalNavigation() {
         options={{
           tabBarLabel: "Esoque",
           tabBarIcon: ({ color }) => (
-            <FontAwesome name="cart-plus" size={22} color={color} />
+            <FontAwesome name="cart-plus" size={size} color={color} />
           ),
         }}
       />
-      {isLogged ? (
-        <Tab.Screen
-          name="Profile"
-          component={Profile}
-          options={{
-            tabBarLabel: "Perfil",
-            tabBarIcon: ({ color }) => (
-              <FontAwesome name="user-circle-o" size={22} color={color} />
-            ),
-          }}
-        />
-      ) : (
-        <Tab.Screen
-          name="Login"
-          component={Login}
-          options={{
-            tabBarLabel: "Menu",
-            tabBarIcon: ({ color }) => (
-              <FontAwesome name="bars" size={22} color={color} />
-            ),
-          }}
-        />
-      )}
+
+      {footerLogged()}
     </Tab.Navigator>
   );
 }

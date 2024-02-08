@@ -3,14 +3,9 @@ import { StackActions, TabActions, NavigationContainerRef, ParamListBase } from 
 
 export const navigationRef = createRef<NavigationContainerRef<ParamListBase>>();
 
-
 export function navigate(name: string, params?: object) {
   navigationRef.current?.navigate(name, params);
 }
-
-// export function push(...args: any) {
-//   navigationRef.current?.dispatch(StackActions.push(...args));
-// }
 
 export function popToTop() {
   navigationRef.current?.dispatch(StackActions.popToTop());
@@ -27,3 +22,7 @@ export function replace(name: string, params?: object) {
 export function navigateTab(name: string) {
   navigationRef.current?.dispatch(TabActions.jumpTo(name));
 }
+
+// export function push(...args: any) {
+//   navigationRef.current?.dispatch(StackActions.push(...args));
+// }

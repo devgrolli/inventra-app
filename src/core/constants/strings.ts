@@ -4,4 +4,7 @@ export const CommonString = {
     productDetailFooterHeight: 72,
     navigationTitleHeight: 44,
   },
+  sizeIcons: {
+    footer: 22
+  }
 };

@@ -1,32 +1,38 @@
-import { TouchableOpacity, Text } from "react-native";
-import { Loading } from "../../../../components/Loading";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { useNavigation, ParamListBase } from "@react-navigation/native";
+import { TouchableOpacity } from "react-native";
+import { navigate } from "@core/navigation/navigator";
 import { Skeleton } from "moti/skeleton";
 import * as S from "./styles";
+import { Colors } from "@core/constants/colors";
+import { FontAwesome } from "@expo/vector-icons";
 
 export interface CardProps {
   img?: any;
   loading: boolean;
+  size?: number;
   navigateRoute?: string | undefined;
-  nameLabel?: string;
+  nameLabel?: string | undefined;
 }
 
 export const Card = (props: CardProps) => {
-  const { img, loading, navigateRoute = "Not-FoudedPage", nameLabel } = props;
-  const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
+  const {
+    img,
+    loading,
+    nameLabel,
+    size = 35,
+    navigateRoute = "Not-FoudedPage",
+  } = props;
 
   return (
     <TouchableOpacity
       disabled={loading}
-      onPress={() => navigation.navigate(navigateRoute)}
+      onPress={() => navigate(navigateRoute)}
     >
       <S.CardView>
         {loading ? (
-          <Skeleton colorMode="light" height={100} width={100} />
+          <Skeleton colorMode="light" height={110} width={110} />
         ) : (
           <>
-            <S.ImageStyled source={img} resizeMode="contain" />
+            <FontAwesome name={img} size={size} color={Colors.blue} />
             <S.LabelsHome>{nameLabel}</S.LabelsHome>
           </>
         )}

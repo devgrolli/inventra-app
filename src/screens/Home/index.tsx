@@ -1,13 +1,8 @@
 import React, { useState } from "react";
+import { Card } from "@screens/Home/components/Card";
 import { View, Text } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
-import { Card } from "@screens/Home/components/Card";
-import User from "@assets/images/users.png";
-import Lucros from "@assets/images/lucros.png";
-import Moviment from "@assets/images/movement.png";
-import Basket from "@assets/images/basket.png";
-import Loss from "@assets/images/loss.png";
-import Relatorio from "@assets/images/relatorio.png";
+import { ViewCard, ViewLabel } from "./styles";
 
 export default function HomeScreen() {
   const [loading, setLoading] = useState(false);
@@ -15,55 +10,55 @@ export default function HomeScreen() {
   return (
     <View style={{ flex: 1 }}>
       <ScrollView>
-        <View style={{ paddingLeft: 32, paddingTop: 20, paddingBottom: 20 }}>
+        <ViewLabel>
           <Text style={{ fontSize: 20 }}>Guia</Text>
-        </View>
-        <View
-          style={{
-            flexDirection: "row",
-            justifyContent: "center",
-          }}
-        >
+        </ViewLabel>
+
+        <ViewCard>
           <Card
+            size={30}
+            img="handshake-o"
             loading={loading}
-            img={User}
             navigateRoute="Home"
             nameLabel="Clientes"
           />
           <Card
+            img="shopping-cart"
             loading={loading}
-            img={Basket}
             navigateRoute="Stock"
             nameLabel="Estoque"
           />
           <Card
+            size={35}
+            img="barcode"
             loading={loading}
-            img={Moviment}
             navigateRoute="Home"
             nameLabel="Vendas"
           />
-        </View>
+        </ViewCard>
 
-        <View style={{ flexDirection: "row", justifyContent: "center" }}>
+        <ViewCard>
           <Card
+            size={30}
+            img="line-chart"
             loading={loading}
-            img={Lucros}
             navigateRoute="Lucros"
             nameLabel="Lucros"
           />
           <Card
+            img="cart-arrow-down"
             loading={loading}
-            img={Loss}
             navigateRoute="Home"
             nameLabel="Prejuízos"
           />
           <Card
+            size={32}
+            img="pie-chart"
             loading={loading}
-            img={Relatorio}
             navigateRoute="Home"
             nameLabel="Relatórios"
           />
-        </View>
+        </ViewCard>
       </ScrollView>
     </View>
   );

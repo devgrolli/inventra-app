@@ -63,3 +63,9 @@ export const Label2 = styled.Text`
   font-size: 30px;
   font-weight: 900;
 `;
+
+export const textToast = styled.Text`
+  color: ${Colors.white};
+  letter-spacing: 0.5;
+  font-weight: 400;
+`;
