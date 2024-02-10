@@ -1,13 +1,26 @@
-import React from "react";
-import { View, Text } from "react-native";
-import { FontAwesome } from "@expo/vector-icons";
-import { ScrollView } from "react-native-gesture-handler";
-
+import React, { useEffect, useState } from "react";
+import { View, ScrollView } from "react-native";
+import { LoadingPage } from "@core/ds/Loading";
 import { Avatar } from "react-native-elements";
 
 import * as S from "./styles";
 
 export default function Stock() {
+  const loading = true;
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setVisible(true);
+    }, 5000);
+
+    return () => clearTimeout(timer);
+  }, [visible]);
+
+  if (!visible) {
+    return <LoadingPage />;
+  }
+
   return (
     <ScrollView>
       <S.Container>

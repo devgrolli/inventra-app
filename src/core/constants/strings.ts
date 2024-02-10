@@ -6,5 +6,9 @@ export const CommonString = {
   },
   sizeIcons: {
     footer: 22
-  }
+  },
+  optionsHeader: {
+    headerShown: false,
+    gestureEnabled: true,
+  },
 };

@@ -1,63 +1,39 @@
 import * as React from "react";
-import { FontAwesome } from "@expo/vector-icons"; // Certifique-se de ter o pacote de ícones instalado
 import { Colors } from "@core/constants/colors";
 import { CommonString } from "@core/constants/strings";
+import { FontAwesome } from "@expo/vector-icons";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import Home from "@screens/Home";
 import Login from "@screens/Login";
-import Teste from "@screens/Teste";
 import Stock from "@screens/Stock";
 import Profile from "@screens/Profile";
 import ButtonUser from "@components/Header/ButtonUser";
+import Notification from "@components/Header/Notification";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
+
 const size = CommonString.sizeIcons.footer;
+const optionsHeader = CommonString.optionsHeader;
 const isLogged = false;
 
-const optionsHeader = {
-  headerShown: false,
-  gestureEnabled: true,
-  headerBackTitle: "Voltar",
-};
-
-function LoginStack() {
+const LoggedStack = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen
-        name="Home"
-        component={Home}
-        options={{
-          headerShown: false,
-          gestureEnabled: true,
-        }}
-      />
+      <Stack.Screen name="Home" component={Home} options={optionsHeader} />
       <Stack.Screen
         name="Profile"
         component={Profile}
         options={optionsHeader}
       />
-      <Stack.Screen
-        name="Stock"
-        component={Stock}
-        options={{ headerShown: false, gestureEnabled: true }}
-      />
-      <Stack.Screen
-        name="Teste"
-        component={Teste}
-        options={{
-          headerShown: true,
-          gestureEnabled: true,
-          headerBackTitle: "Voltar",
-        }}
-      />
+      <Stack.Screen name="Stock" component={Stock} options={optionsHeader} />
     </Stack.Navigator>
   );
-}
+};
 
-function footerLogged() {
+const footerValidateLogged = () => {
   if (isLogged) {
     return (
       <Tab.Screen
@@ -87,7 +63,7 @@ function footerLogged() {
       }}
     />
   );
-}
+};
 
 export function GlobalNavigation() {
   return (
@@ -100,7 +76,7 @@ export function GlobalNavigation() {
     >
       <Tab.Screen
         name=" "
-        component={LoginStack}
+        component={LoggedStack}
         options={{
           tabBarLabel: "Início",
           headerStyle: {
@@ -108,12 +84,21 @@ export function GlobalNavigation() {
             backgroundColor: Colors.blue,
             borderBottomRightRadius: 30,
             borderBottomLeftRadius: 30,
+            shadowColor: Colors.blue,
+            shadowOffset: {
+              width: 0,
+              height: 10,
+            },
+            shadowOpacity: 0.25,
+            shadowRadius: 3.84,
+            elevation: 5,
           },
           headerShown: true,
           tabBarIcon: ({ color }) => (
             <FontAwesome name="home" size={size} color={color} />
           ),
           headerLeft: () => <ButtonUser />,
+          headerRight: () => <Notification />,
         }}
       />
       <Tab.Screen
@@ -127,7 +112,7 @@ export function GlobalNavigation() {
         }}
       />
 
-      {footerLogged()}
+      {footerValidateLogged()}
     </Tab.Navigator>
   );
 }

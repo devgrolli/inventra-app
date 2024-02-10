@@ -32,7 +32,7 @@ export const Card = (props: CardProps) => {
           <Skeleton colorMode="light" height={110} width={110} />
         ) : (
           <>
-            <FontAwesome name={img} size={size} color={Colors.blue} />
+            <FontAwesome name={img} size={size} color={Colors.greyDark} />
             <S.LabelsHome>{nameLabel}</S.LabelsHome>
           </>
         )}

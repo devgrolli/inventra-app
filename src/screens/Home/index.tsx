@@ -1,11 +1,33 @@
 import React, { useState } from "react";
 import { Card } from "@screens/Home/components/Card";
-import { View, Text } from "react-native";
-import { ScrollView } from "react-native-gesture-handler";
+import { View, Text, ScrollView } from "react-native";
+import { DataComponent } from "@core/constants/data";
 import { ViewCard, ViewLabel } from "./styles";
 
-export default function HomeScreen() {
-  const [loading, setLoading] = useState(false);
+interface CardProps {
+  img: string;
+  navigateRoute: string;
+  nameLabel: string;
+  size?: number;
+}
+
+type CardGroup = CardProps[];
+
+const HomeScreen: React.FC = () => {
+  const [loading, setLoading] = useState<boolean>(false);
+
+  const renderCards = (cards: CardGroup) => {
+    return cards.map((card, index) => (
+      <Card
+        key={index}
+        size={card.size}
+        img={card.img}
+        loading={loading}
+        navigateRoute={card.navigateRoute}
+        nameLabel={card.nameLabel}
+      />
+    ));
+  };
 
   return (
     <View style={{ flex: 1 }}>
@@ -14,52 +36,12 @@ export default function HomeScreen() {
           <Text style={{ fontSize: 20 }}>Guia</Text>
         </ViewLabel>
 
-        <ViewCard>
-          <Card
-            size={30}
-            img="handshake-o"
-            loading={loading}
-            navigateRoute="Home"
-            nameLabel="Clientes"
-          />
-          <Card
-            img="shopping-cart"
-            loading={loading}
-            navigateRoute="Stock"
-            nameLabel="Estoque"
-          />
-          <Card
-            size={35}
-            img="barcode"
-            loading={loading}
-            navigateRoute="Home"
-            nameLabel="Vendas"
-          />
-        </ViewCard>
-
-        <ViewCard>
-          <Card
-            size={30}
-            img="line-chart"
-            loading={loading}
-            navigateRoute="Lucros"
-            nameLabel="Lucros"
-          />
-          <Card
-            img="cart-arrow-down"
-            loading={loading}
-            navigateRoute="Home"
-            nameLabel="Prejuízos"
-          />
-          <Card
-            size={32}
-            img="pie-chart"
-            loading={loading}
-            navigateRoute="Home"
-            nameLabel="Relatórios"
-          />
-        </ViewCard>
+        {DataComponent.cardDataHome.map((group: CardGroup, index: number) => (
+          <ViewCard key={index}>{renderCards(group)}</ViewCard>
+        ))}
       </ScrollView>
     </View>
   );
-}
+};
+
+export default HomeScreen;
