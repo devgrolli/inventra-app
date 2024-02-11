@@ -1,5 +1,5 @@
 import React from "react";
-import { Pressable, KeyboardTypeOptions } from "react-native";
+import { KeyboardTypeOptions } from "react-native";
 import { Input } from "./styles";
 
 interface ButtonProps {

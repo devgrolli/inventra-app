@@ -9,8 +9,8 @@ import Home from "@screens/Home";
 import Login from "@screens/Login";
 import Stock from "@screens/Stock";
 import Profile from "@screens/Profile";
-import ButtonUser from "@components/Header/ButtonUser";
-import Notification from "@components/Header/Notification";
+import ButtonUser from "@core/components/Header/ButtonUser";
+import Notification from "@core/components/Header/Notification";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();

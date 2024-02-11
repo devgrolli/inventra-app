@@ -5,7 +5,7 @@ import { Skeleton } from "moti/skeleton";
 
 const Spacer = ({ height = 16 }) => <MotiView style={{ height }} />;
 
-export const Loading = () => {
+export const Shimmer = () => {
   const [dark, toggle] = useReducer((s) => !s, true);
 
   const colorMode = dark ? "dark" : "light";

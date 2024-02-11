@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { View, ScrollView } from "react-native";
-import { LoadingPage } from "@core/ds/Loading";
+import { View, ScrollView, FlatList, Text, StyleSheet } from "react-native";
+import { LoadingPage } from "@core/components/LoadingPage";
 import { Avatar } from "react-native-elements";
+import { DataComponent } from "@core/constants/data";
 
+// Supondo que S seja seu módulo de estilos
 import * as S from "./styles";
 
 export default function Stock() {
-  const loading = true;
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -21,25 +22,29 @@ export default function Stock() {
     return <LoadingPage />;
   }
 
-  return (
-    <ScrollView>
-      <S.Container>
-        <S.AvatarContainer>
-          <Avatar
-            rounded
-            source={{
-              uri: "https://media.licdn.com/dms/image/D4D03AQH831Yo3eXp5w/profile-displayphoto-shrink_400_400/0/1703015487827?e=1708560000&v=beta&t=MlEAWa3e8q5BstH1b61oX-bkc6z7Kh3yd5SDpx5-L5U",
-            }}
-            size="xlarge"
-          />
-        </S.AvatarContainer>
+  // Definição da linha da tabela
+  const renderRow = ({ item }: any) => (
+    <S.ViewProducts>
+      <S.TextProd>{item.productId}</S.TextProd>
+      <S.TextProd>{item.name}</S.TextProd>
+      <S.TextProd>{item.qtd}</S.TextProd>
+    </S.ViewProducts>
+  );
 
-        <S.ViewConfigures>
-          <View style={{ padding: 20 }}>
-            <S.LabelConfig>ESTOQUE</S.LabelConfig>
-          </View>
-        </S.ViewConfigures>
-      </S.Container>
-    </ScrollView>
+  return (
+    <S.Container>
+      <S.ViewProductsHeader>
+        <S.TextProdHeader>Código</S.TextProdHeader>
+        <S.TextProdHeader>Produto</S.TextProdHeader>
+        <S.TextProdHeader>Quantidade</S.TextProdHeader>
+      </S.ViewProductsHeader>
+
+      <FlatList
+        contentContainerStyle={{ paddingRight: 15, paddingLeft: 15 }}
+        data={DataComponent.stockData}
+        keyExtractor={(item) => item.productId.toString()}
+        renderItem={renderRow}
+      />
+    </S.Container>
   );
 }

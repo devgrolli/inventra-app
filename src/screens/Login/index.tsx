@@ -6,7 +6,7 @@ import {
   ScrollView,
   KeyboardAvoidingView,
 } from "react-native";
-import { DSButton } from "@core/ds/Button";
+import { DSButton } from "@core/components/Button";
 import { Snackbar } from "react-native-paper";
 import { useLogin } from "./useLogin";
 import { Colors } from "@core/constants/colors";
