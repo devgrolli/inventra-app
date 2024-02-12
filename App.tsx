@@ -1,6 +1,8 @@
 import * as React from "react";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { GlobalNavigation } from "./src/core/navigation/MainContainer";
+import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
+
 import { NavigationContainer } from "@react-navigation/native";
 import { navigationRef } from "@core/navigation/navigator"; // Ajuste o caminho conforme necessário
 import { Provider } from "react-redux";
@@ -27,9 +29,11 @@ export default function App() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <NavigationContainer ref={navigationRef}>
-        <Provider store={store}>
-          <GlobalNavigation />
-        </Provider>
+        <BottomSheetModalProvider>
+          <Provider store={store}>
+            <GlobalNavigation />
+          </Provider>
+        </BottomSheetModalProvider>
       </NavigationContainer>
     </GestureHandlerRootView>
   );

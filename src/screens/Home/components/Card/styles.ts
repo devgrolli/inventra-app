@@ -26,5 +26,5 @@ export const LabelsHome = styled.Text`
   padding-top: 20px;
   color: ${Colors.greyDark};
   font-weight: 600;
-  letter-spacing: 0.25;
+  letter-spacing: 0.25px;
 `;
