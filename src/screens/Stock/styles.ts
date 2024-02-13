@@ -26,8 +26,8 @@ export const ViewProducts = styled.View`
 export const ViewProductsHeader = styled.View`
   width: 100%;
   height: 60px;
-  background-color: ${Colors.blue};
   border-radius: 20px;
+  background-color: ${Colors.blue};
   shadow-color: ${Colors.black};
   shadow-offset: 0px 1px;
   shadow-opacity: 0.35;
@@ -58,3 +58,50 @@ export const AvatarContainer = styled.View`
   padding-top: 30px;
   padding-bottom: 20px;
 `;
+
+export const ViewContextSheet = styled.View`
+  position: relative;
+  flex-direction: row;
+  align-items: center;
+  /* padding: 10px; */
+  margin: 10px;
+  width: 90%;
+`;
+
+export const ViewProductSheet = styled.View`
+  margin-left: 10px;
+  flex: 1;
+`;
+
+export const InfoProductSheet  = styled.Text`
+  font-size: 20px;
+`;
+
+export const ButtonProductView  = styled.TouchableOpacity`
+  background-color: ${Colors.blue};
+  border-radius: 40px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  shadow-color: ${Colors.black};
+  shadow-offset: 0px 1px;
+  shadow-opacity: 0.35;
+  flex-direction: row;
+`;
+
+export const ProductViewText = styled.Text`
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  letter-spacing: 0.8px;
+`;
+
+export const ProductView = styled.View`
+width: 100%;
+padding-left: 20px;
+padding-right: 20px;
+position: absolute;
+bottom: 35px;
+`;
+

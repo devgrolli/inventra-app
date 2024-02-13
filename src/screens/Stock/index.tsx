@@ -5,19 +5,17 @@ import React, {
   useRef,
   useState,
 } from "react";
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  FlatList,
-  StyleSheet,
-} from "react-native";
-import { BottomSheetModal } from "@gorhom/bottom-sheet";
+import { TouchableOpacity, FlatList } from "react-native";
+import { BottomSheetModal, BottomSheetBackdrop } from "@gorhom/bottom-sheet";
 import { LoadingPage } from "@core/components/LoadingPage";
 import { DataComponent } from "@core/constants/data";
 import { Avatar } from "react-native-elements";
+import { Colors } from "@core/constants/colors";
 
-// Supondo que S seja seu módulo de estilos
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { faArrowRightArrowLeft } from "@fortawesome/free-solid-svg-icons/faArrowRightArrowLeft";
+import { faXmark } from "@fortawesome/free-solid-svg-icons/faXmark";
+
 import * as S from "./styles";
 
 export default function Stock() {
@@ -40,7 +38,7 @@ export default function Stock() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setVisible(true);
-    }, 5000);
+    }, 1000);
 
     return () => clearTimeout(timer);
   }, [visible]);
@@ -75,6 +73,7 @@ export default function Stock() {
       />
 
       <BottomSheetModal
+        backdropComponent={BottomSheetBackdrop}
         ref={bottomSheetModalRef}
         index={1}
         style={{
@@ -88,39 +87,45 @@ export default function Stock() {
           elevation: 7,
         }}
         snapPoints={snapPoints}
+        enableDismissOnClose={true}
         onChange={handleSheetChanges}
       >
-        <View style={styles.contentContainer}>
-          <Text>Id: {productSelected.productId}</Text>
-          <Text>Produto: {productSelected.name}</Text>
-          <Text>Quantidade em Estoque: {productSelected.qtd}</Text>
+        {/* <TouchableOpacity
+          onPress={() => bottomSheetModalRef.current?.collapse()}
+        >
+          <FontAwesomeIcon icon={faXmark} size={25} />
+        </TouchableOpacity> */}
+        <S.ViewContextSheet>
+          <Avatar
+            rounded
+            source={{ uri: productSelected.imageUrl }}
+            size="xlarge"
+          />
 
-          <S.AvatarContainer>
-            {/* <Image source={{ uri: item.imageUrl }} style={{ width: 50, height: 50 }} /> */}
-            <Avatar
-              rounded
-              source={{ uri: productSelected.imageUrl }}
-              size="xlarge"
+          <S.ViewProductSheet>
+            <S.InfoProductSheet>
+              Produto: {productSelected.name}
+            </S.InfoProductSheet>
+            <S.InfoProductSheet>
+              Quantidade em Estoque: {productSelected.qtd}
+            </S.InfoProductSheet>
+          </S.ViewProductSheet>
+          {/* <Image source={{ uri: item.imageUrl }} style={{ width: 50, height: 50 }} /> */}
+        </S.ViewContextSheet>
+
+        <S.ProductView>
+          <S.ButtonProductView>
+            <S.ProductViewText>Movimentar Estoque</S.ProductViewText>
+            <FontAwesomeIcon
+              icon={faArrowRightArrowLeft}
+              color={Colors.white}
+              style={{ marginLeft: 10 }}
+              size={20}
             />
-          </S.AvatarContainer>
-        </View>
+            {/* <FontAwesome name="bars" size={20} color={Colors.white} /> */}
+          </S.ButtonProductView>
+        </S.ProductView>
       </BottomSheetModal>
     </S.Container>
   );
 }
-
-const styles = StyleSheet.create({
-  contentContainer: {
-    flex: 1,
-    alignItems: "center",
-    backgroundColor: "white", // Fundo precisa ser não-transparente para a sombra aparecer
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
-  },
-});
