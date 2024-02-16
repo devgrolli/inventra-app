@@ -1,13 +1,15 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View, TouchableOpacity } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 import { ScrollView } from "react-native-gesture-handler";
-
 import { Avatar } from "react-native-elements";
 
 import * as S from "./styles";
+import { useAuth } from "context/AuthContext";
+import { Touchable } from "react-native";
 
 export default function ProfileScreen() {
+  const { signOut } = useAuth();
   return (
     <ScrollView>
       <S.Container>
@@ -48,7 +50,9 @@ export default function ProfileScreen() {
                   style={{ color: "#acafb3" }}
                 />
               </S.Button>
-              <S.LabelLink>Sair</S.LabelLink>
+              <TouchableOpacity onPress={() => signOut()}>
+                <S.LabelLink>Sair</S.LabelLink>
+              </TouchableOpacity>
             </S.StyledView>
           </View>
         </S.ViewConfigures>

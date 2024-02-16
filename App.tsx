@@ -5,6 +5,7 @@ import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { navigationRef } from "@core/navigation/navigator"; // Ajuste o caminho conforme necessário
+import { AuthProvider } from "./src/context/AuthContext"; // Atualize o caminho conforme necessário
 import { Provider } from "react-redux";
 import store from "./src/redux/store";
 
@@ -13,6 +14,7 @@ import {
   OpenSans_400Regular,
   OpenSans_600SemiBold,
   OpenSans_700Bold,
+  OpenSans_800ExtraBold,
 } from "@expo-google-fonts/open-sans";
 
 export default function App() {
@@ -20,6 +22,7 @@ export default function App() {
     OpenSans_400Regular,
     OpenSans_600SemiBold,
     OpenSans_700Bold,
+    OpenSans_800ExtraBold,
   });
 
   if (!fontsLoaded) {
@@ -29,11 +32,13 @@ export default function App() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <NavigationContainer ref={navigationRef}>
-        <BottomSheetModalProvider>
-          <Provider store={store}>
-            <GlobalNavigation />
-          </Provider>
-        </BottomSheetModalProvider>
+        <AuthProvider>
+          <BottomSheetModalProvider>
+            <Provider store={store}>
+              <GlobalNavigation />
+            </Provider>
+          </BottomSheetModalProvider>
+        </AuthProvider>
       </NavigationContainer>
     </GestureHandlerRootView>
   );

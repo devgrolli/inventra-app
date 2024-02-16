@@ -14,7 +14,7 @@ import { Colors } from "@core/constants/colors";
 
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faArrowRightArrowLeft } from "@fortawesome/free-solid-svg-icons/faArrowRightArrowLeft";
-import { faXmark } from "@fortawesome/free-solid-svg-icons/faXmark";
+import { faBarcode } from "@fortawesome/free-solid-svg-icons/faBarcode";
 
 import * as S from "./styles";
 
@@ -50,7 +50,7 @@ export default function Stock() {
   const renderRow = ({ item }: any) => (
     <TouchableOpacity onPress={() => handlePresentModalPress(item)}>
       <S.ViewProducts>
-        <S.TextProd>{item.productId}</S.TextProd>
+        <Avatar rounded source={{ uri: item.imageUrl }} size="small" />
         <S.TextProd>{item.name}</S.TextProd>
         <S.TextProd>{item.qtd}</S.TextProd>
       </S.ViewProducts>
@@ -95,27 +95,31 @@ export default function Stock() {
         >
           <FontAwesomeIcon icon={faXmark} size={25} />
         </TouchableOpacity> */}
+        <S.ViewHeadeSheet>
+          <S.HeaderLabelSheet>Detalhes do Produto</S.HeaderLabelSheet>
+        </S.ViewHeadeSheet>
+
+        <S.Separator />
+
         <S.ViewContextSheet>
           <Avatar
-            rounded
+            containerStyle={{ shadowColor: "black" }}
             source={{ uri: productSelected.imageUrl }}
             size="xlarge"
           />
 
           <S.ViewProductSheet>
-            <S.InfoProductSheet>
-              Produto: {productSelected.name}
-            </S.InfoProductSheet>
-            <S.InfoProductSheet>
-              Quantidade em Estoque: {productSelected.qtd}
-            </S.InfoProductSheet>
+            <S.ProductNameSheet>{productSelected.name}</S.ProductNameSheet>
+            <S.ProductQtdSheet>
+              Em estoque {productSelected.qtd}
+            </S.ProductQtdSheet>
           </S.ViewProductSheet>
-          {/* <Image source={{ uri: item.imageUrl }} style={{ width: 50, height: 50 }} /> */}
         </S.ViewContextSheet>
 
+        {/* <S.Divider /> */}
         <S.ProductView>
           <S.ButtonProductView>
-            <S.ProductViewText>Movimentar Estoque</S.ProductViewText>
+            <S.ProductViewText>Adicionar Estoque</S.ProductViewText>
             <FontAwesomeIcon
               icon={faArrowRightArrowLeft}
               color={Colors.white}
@@ -124,6 +128,17 @@ export default function Stock() {
             />
             {/* <FontAwesome name="bars" size={20} color={Colors.white} /> */}
           </S.ButtonProductView>
+
+          <S.ButtonSale>
+            <S.ProductViewText>Vender</S.ProductViewText>
+            <FontAwesomeIcon
+              icon={faBarcode}
+              color={Colors.white}
+              style={{ marginLeft: 10 }}
+              size={20}
+            />
+            {/* <FontAwesome name="bars" size={20} color={Colors.white} /> */}
+          </S.ButtonSale>
         </S.ProductView>
       </BottomSheetModal>
     </S.Container>

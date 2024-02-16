@@ -4,8 +4,11 @@ import { Platform } from "react-native";
 import { getStatusBarHeight } from "react-native-iphone-screen-helper";
 import { CommonString } from "@core/constants/strings";
 import { useSelector, useDispatch } from "react-redux";
+import { useAuth } from "context/AuthContext";
 
 export function useLogin() {
+  const { signIn } = useAuth();
+
   const [msgError, setMsgError] = useState("Erro ao realizar login");
   const [loading, setLoading] = useState(false);
   const [visible, setVisible] = useState(false);
@@ -48,6 +51,7 @@ export function useLogin() {
     const senhateste = "123456";
 
     if (email === emailteste && senhateste === password) {
+      signIn({ id: "123", name: "Lucas Grolli de Oliveira" });
       navigate("Home");
     } else {
       // setError(!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$i.test(email));
