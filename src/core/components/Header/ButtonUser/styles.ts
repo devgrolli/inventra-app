@@ -21,8 +21,8 @@ export const TextUser = styled.Text`
   font-family: 'OpenSans_700Bold';
   letter-spacing: 0.8px;
   height: 24px;
-  width: 75%;
-  overflow: hidden;
+  width: 100%;
+  /* overflow: hidden;
   white-space: nowrap;
-  text-overflow: ellipsis; 
+  text-overflow: ellipsis;  */
 `;

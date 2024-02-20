@@ -34,13 +34,16 @@ export default function Login() {
     handlePasswordFocus,
   } = useLogin();
 
+  const headerHeight = 100;
+  const paddingTop = headerHeight * 0.9;
+
   return (
     <KeyboardAvoidingView
       style={{ flex: 1 }}
       behavior={Platform.OS === "ios" ? "padding" : "height"}
       keyboardVerticalOffset={getKeyboardVerticalOffset()}
     >
-      <ScrollView style={{ flex: 1 }}>
+      <ScrollView style={{ flex: 1, paddingTop }}>
         <View style={{ alignItems: "center" }}>
           <Image source={Logo} />
           <S.LabelLogo>
@@ -89,7 +92,7 @@ export default function Login() {
           right: 0,
           bottom: 0,
           height: 60,
-          borderRadius: 10,
+          borderRadius: 15,
           position: "absolute",
           alignItems: "center",
           backgroundColor: Colors.orange,

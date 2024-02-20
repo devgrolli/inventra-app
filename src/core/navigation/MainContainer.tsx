@@ -12,6 +12,9 @@ import Profile from "@screens/Profile";
 import ButtonUser from "@core/components/Header/ButtonUser";
 import Notification from "@core/components/Header/Notification";
 import { useAuth } from "context/AuthContext";
+import LogoHeader from "@core/components/Header/Logo";
+import { DataComponent } from "@core/constants/data";
+import { InitialScreen } from "@screens/Initial";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -20,29 +23,31 @@ const size = CommonString.sizeIcons.footer;
 const optionsHeader = CommonString.optionsHeader;
 const isLogged = false;
 
-const headerStyleByName = (namePage: string, icon: string) => {
+const headerStylePrimary = (namePage: string, icon: string) => {
   return {
     tabBarLabel: namePage,
-    headerStyle: {
-      height: 180,
-      backgroundColor: Colors.blue,
-      borderBottomRightRadius: 30,
-      borderBottomLeftRadius: 30,
-      shadowColor: Colors.blue,
-      shadowOffset: {
-        width: 0,
-        height: 10,
-      },
-      shadowOpacity: 0.25,
-      shadowRadius: 3.84,
-      elevation: 5,
-    },
+    headerStyle: DataComponent.header.primary,
+    headerTintColor: Colors.blue,
     headerShown: true,
     tabBarIcon: ({ color }: any) => (
       <FontAwesome name={icon as any} size={size} color={color} />
     ),
     headerLeft: () => <ButtonUser />,
     headerRight: () => <Notification />,
+  };
+};
+
+const headerStyleSecondary = (namePage: string, icon: string) => {
+  return {
+    tabBarLabel: namePage,
+    headerStyle: DataComponent.header.secondary,
+    headerTintColor: Colors.white,
+    headerShown: true,
+    tabBarIcon: ({ color }: any) => (
+      <FontAwesome name={icon as any} size={size} color={color} />
+    ),
+    headerLeft: () => <LogoHeader />,
+    // headerRight: () => <Notification />,
   };
 };
 
@@ -73,11 +78,22 @@ export function GlobalNavigation() {
         }}
       >
         <Tab.Screen
+          key="Início"
+          name="Início"
+          component={InitialScreen}
+          options={{
+            headerShown: false,
+            tabBarStyle: { display: "none" },
+          }}
+        />
+
+        <Tab.Screen
           key="Login"
           name="Login"
           component={Login}
           options={{
-            tabBarLabel: "Menu",
+            tabBarLabel: "Login",
+            headerShown: false,
             tabBarIcon: ({ color }) => (
               <FontAwesome name="bars" size={size} color={color} />
             ),
@@ -98,18 +114,18 @@ export function GlobalNavigation() {
       <Tab.Screen
         name=" "
         component={HomeRoutes}
-        options={headerStyleByName("Início", "home")}
+        options={headerStylePrimary("Início", "home")}
       />
       <Tab.Screen
         name="Estoque"
         component={Stock}
-        options={headerStyleByName("Estoque", "cart-plus")}
+        options={headerStyleSecondary("Estoque", "cart-plus")}
       />
       <Tab.Screen
         key="Profile"
-        name="Profile"
+        name="Perfil"
         component={Profile}
-        options={headerStyleByName("Perfil", "user-circle-o")}
+        options={headerStyleSecondary("Perfil", "user-circle-o")}
       />
     </Tab.Navigator>
   );

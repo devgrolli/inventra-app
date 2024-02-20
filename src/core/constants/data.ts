@@ -1,3 +1,5 @@
+import { Colors } from "./colors";
+
 export const DataComponent = {
   cardDataHome: [
     [
@@ -26,6 +28,32 @@ export const DataComponent = {
       },
     ],
   ],
+  header: {
+    primary: {
+      height: 180,
+      backgroundColor: Colors.blue,
+      borderBottomRightRadius: 30,
+      borderBottomLeftRadius: 30,
+      shadowColor: Colors.blue,
+      shadowOffset: {
+        width: 0,
+        height: 10,
+      },
+      shadowOpacity: 0.25,
+      shadowRadius: 3.84,
+      elevation: 5,
+    },
+    secondary: {
+      height: 130,
+      shadowColor: Colors.black,
+      shadowOffset: {
+        width: 0,
+        height: 1,
+      },
+      shadowOpacity: 0.2,
+      shadowRadius: 1,
+    },
+  },
   stockData: [
     {"productId": 1, "name": "Biscoito de Milho", "qtd": 100, "imageUrl": "https://cdn.awsli.com.br/1030/1030675/produto/12390315614c97b9451.jpg"},
     {"productId": 2, "name": "Bolacha de água e sal", "qtd": 150, "imageUrl": "https://cdn.awsli.com.br/1030/1030675/produto/12390315614c97b9451.jpg"},

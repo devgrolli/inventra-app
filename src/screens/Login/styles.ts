@@ -11,7 +11,7 @@ export const ViewCard = styled.View`
   height: 300px;
   width: 190px;
   margin: 10px;
-  border-radius: 10px;
+  border-radius: 15px;
   align-items: "center";
   justify-content: "center";
 `;
@@ -24,7 +24,7 @@ export const Container = styled.View`
 
 export const Input = styled(TextInput)<InputProps>`
   flex: 1;
-  border-radius: 10px;
+  border-radius: 15px;
   border-color: ${({ hasError, isFocused }: InputProps) =>
     hasError ? Colors.orange : isFocused ? Colors.blue : Colors.grey};
   height: 50px;
@@ -36,7 +36,7 @@ export const Input = styled(TextInput)<InputProps>`
 export const ButtonView = styled.TouchableOpacity`
   width: 128px;
   height: 50px;
-  border-radius: 10px;
+  border-radius: 15px;
   background-color: ${Colors.blue};
   justify-content: center;
   align-items: center;

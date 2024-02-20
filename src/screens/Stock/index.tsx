@@ -22,15 +22,13 @@ export default function Stock() {
   const [visible, setVisible] = useState(false);
   const [productSelected, setProductSelected] = useState("");
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
-
-  // variables
   const snapPoints = useMemo(() => ["25%", "50%"], []);
 
-  // callbacks
   const handlePresentModalPress = useCallback((item: any) => {
     setProductSelected(item);
     bottomSheetModalRef.current?.present();
   }, []);
+
   const handleSheetChanges = useCallback((index: number) => {
     console.log("handleSheetChanges", index);
   }, []);
