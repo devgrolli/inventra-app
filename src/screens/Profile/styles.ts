@@ -39,12 +39,6 @@ export const ViewLabel = styled.TouchableOpacity`
   align-items: "center";
 `;
 
-export const StyledView = styled.View`
-  flex-direction: row;
-  align-items: center;
-  padding-left: 10px;
-`;
-
 export const LabelConfig = styled.Text`
   color: ${Colors.black};
   font-family: 'OpenSans_400Regular';
@@ -67,3 +61,10 @@ export const AvatarContainer = styled.View`
   padding-top: 30px;
   padding-bottom: 20px;
 `;
+
+export const ViewListItem = styled.View`
+  flex-direction: row;
+  align-items: center;
+  padding-left: 20px;
+  padding-top: 15px;
+`

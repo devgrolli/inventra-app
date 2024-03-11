@@ -1,5 +1,4 @@
 {
-  "extends": "expo/tsconfig.base",
   "compilerOptions": {
     "jsx": "react-native",
     "resolveJsonModule": true,
@@ -12,12 +11,29 @@
     "experimentalDecorators": true,
     "baseUrl": "./src",
     "paths": {
-      "@core/*": ["core/*"],
-      "@utils/*": ["utils/*"],
-      "@assets/*": ["assets/*"],
-      "@screens/*": ["screens/*"],
-      "@components/*": ["components/*"]
+      "@core/*": [
+        "core/*"
+      ],
+      "@utils/*": [
+        "utils/*"
+      ],
+      "@assets/*": [
+        "assets/*"
+      ],
+      "@screens/*": [
+        "screens/*"
+      ],
+      "@service/*": [
+        "service/*"
+      ],
+      "@components/*": [
+        "components/*"
+      ]
     }
   },
-  "include": ["**/*.ts", "**/*.tsx"]
+  "include": [
+    "**/*.ts",
+    "**/*.tsx"
+  ],
+  "extends": "expo/tsconfig.base"
 }

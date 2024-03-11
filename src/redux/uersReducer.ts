@@ -30,7 +30,7 @@ const userReducer = (state: UserState = userInitialState, action: any): UserStat
         ...state,
         profile: {
           ...state.profile,
-          isLogged: true,
+          isLogged: false,
         },
       };
     // outros casos e lógica do reducer

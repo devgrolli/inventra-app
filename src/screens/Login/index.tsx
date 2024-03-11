@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   Image,
@@ -11,27 +11,29 @@ import { Snackbar } from "react-native-paper";
 import { useLogin } from "./useLogin";
 import { Colors } from "@core/constants/colors";
 import Logo from "@assets/images/Login-logo.png";
+import { TextInputMask } from "react-native-masked-text";
+
 import * as S from "./styles";
 
 export default function Login() {
   const {
+    cpf,
     error,
     loading,
-    email,
     msgError,
     password,
-    emailFocused,
+    cpfFocused,
     passwordFocused,
-    getKeyboardVerticalOffset,
-    setEmail,
-    setPassword,
+    setCpf,
     handleBlur,
     cleanErrors,
+    setPassword,
     handleSubmit,
+    handleCpfFocus,
     handleTestError,
     onDismissSnackBar,
-    handleEmailFocus,
     handlePasswordFocus,
+    getKeyboardVerticalOffset,
   } = useLogin();
 
   const headerHeight = 100;
@@ -52,17 +54,18 @@ export default function Login() {
         </View>
 
         <View style={{ padding: 20 }}>
-          <S.Input
-            onChangeText={(text) => setEmail(text)}
-            value={email}
+          <S.InputCpf
+            type="cpf"
+            value={cpf}
+            onChangeText={(text) => setCpf(text)}
+            placeholder="CPF"
             hasError={error}
-            isFocused={emailFocused}
-            placeholder="E-mail"
+            isFocused={cpfFocused}
             onBlur={handleBlur}
-            onFocus={handleEmailFocus}
+            onFocus={handleCpfFocus}
             onSubmitEditing={handleSubmit}
-            keyboardType="email-address"
           />
+
           <S.Input
             onChangeText={(text) => setPassword(text)}
             value={password}

@@ -7,6 +7,7 @@ import { Avatar } from "react-native-elements";
 import * as S from "./styles";
 import { useAuth } from "context/AuthContext";
 import { Touchable } from "react-native";
+import { navigate } from "@core/navigation/navigator";
 
 export default function ProfileScreen() {
   const { signOut } = useAuth();
@@ -31,29 +32,38 @@ export default function ProfileScreen() {
           <S.Separator />
 
           <View style={{ paddingTop: 15 }}>
-            <S.StyledView>
-              <S.Button>
+            <TouchableOpacity onPress={() => navigate("EditProfile")}>
+              <S.ViewListItem>
                 <FontAwesome
                   name="pencil"
                   size={30}
-                  style={{ color: "#acafb3" }}
+                  style={{ color: "#acafb3", marginRight: 10 }}
                 />
-              </S.Button>
-              <S.LabelLink>Alterar perfil</S.LabelLink>
-            </S.StyledView>
+                <S.LabelLink>Alterar perfil</S.LabelLink>
+              </S.ViewListItem>
+            </TouchableOpacity>
 
-            <S.StyledView>
-              <S.Button>
+            <TouchableOpacity onPress={() => navigate("ListUsers")}>
+              <S.ViewListItem>
+                <FontAwesome
+                  name="users"
+                  size={25}
+                  style={{ color: "#acafb3", marginRight: 10 }}
+                />
+                <S.LabelLink>Gerenciar usuários</S.LabelLink>
+              </S.ViewListItem>
+            </TouchableOpacity>
+
+            <TouchableOpacity onPress={() => signOut()}>
+              <S.ViewListItem>
                 <FontAwesome
                   name="sign-out"
                   size={30}
-                  style={{ color: "#acafb3" }}
+                  style={{ color: "#acafb3", marginRight: 10 }}
                 />
-              </S.Button>
-              <TouchableOpacity onPress={() => signOut()}>
                 <S.LabelLink>Sair</S.LabelLink>
-              </TouchableOpacity>
-            </S.StyledView>
+              </S.ViewListItem>
+            </TouchableOpacity>
           </View>
         </S.ViewConfigures>
       </S.Container>

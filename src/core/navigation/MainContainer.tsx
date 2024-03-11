@@ -9,6 +9,8 @@ import Home from "@screens/Home";
 import Login from "@screens/Login";
 import Stock from "@screens/Stock";
 import Profile from "@screens/Profile";
+import EditProfile from "@screens/Profile/EditProfile";
+import ListUsers from "@screens/Profile/ListUsers";
 import ButtonUser from "@core/components/Header/ButtonUser";
 import Notification from "@core/components/Header/Notification";
 import { useAuth } from "context/AuthContext";
@@ -65,6 +67,28 @@ const HomeRoutes = () => {
   );
 };
 
+export function PerfilNavigation() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Profile"
+        component={Profile}
+        options={optionsHeader}
+      />
+      <Stack.Screen
+        name="EditProfile"
+        component={EditProfile}
+        options={optionsHeader}
+      />
+      <Stack.Screen
+        name="ListUsers"
+        component={ListUsers}
+        options={optionsHeader}
+      />
+    </Stack.Navigator>
+  );
+}
+
 export function GlobalNavigation() {
   const { user } = useAuth();
 
@@ -84,6 +108,9 @@ export function GlobalNavigation() {
           options={{
             headerShown: false,
             tabBarStyle: { display: "none" },
+            tabBarIcon: ({ color }) => (
+              <FontAwesome name="home" size={size} color={color} />
+            ),
           }}
         />
 
@@ -95,7 +122,7 @@ export function GlobalNavigation() {
             tabBarLabel: "Login",
             headerShown: false,
             tabBarIcon: ({ color }) => (
-              <FontAwesome name="bars" size={size} color={color} />
+              <FontAwesome name="sign-in" size={size} color={color} />
             ),
           }}
         />
@@ -122,9 +149,8 @@ export function GlobalNavigation() {
         options={headerStyleSecondary("Estoque", "cart-plus")}
       />
       <Tab.Screen
-        key="Profile"
         name="Perfil"
-        component={Profile}
+        component={PerfilNavigation}
         options={headerStyleSecondary("Perfil", "user-circle-o")}
       />
     </Tab.Navigator>

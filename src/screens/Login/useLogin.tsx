@@ -5,6 +5,7 @@ import { getStatusBarHeight } from "react-native-iphone-screen-helper";
 import { CommonString } from "@core/constants/strings";
 import { useSelector, useDispatch } from "react-redux";
 import { useAuth } from "context/AuthContext";
+import authService from "services/authService";
 
 export function useLogin() {
   const { signIn } = useAuth();
@@ -13,11 +14,11 @@ export function useLogin() {
   const [loading, setLoading] = useState(false);
   const [visible, setVisible] = useState(false);
   const [error, setError] = useState(false);
-  const [emailFocused, setEmailFocused] = useState(false);
   const [passwordFocused, setPasswordFocused] = useState(false);
+  const [cpfFocused, setCpfFocused] = useState(false);
 
-  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [cpf, setCpf] = useState("");
 
   const getKeyboardVerticalOffset = useCallback(() => {
     const statusBarHeight = getStatusBarHeight();
@@ -28,35 +29,37 @@ export function useLogin() {
       : (statusBarHeight + navigationTitleHeight + searchBarHeight) * -1;
   }, []);
 
-  const handleEmailFocus = () => {
-    setEmailFocused(true);
-    setPasswordFocused(false);
-  };
-
   const handlePasswordFocus = () => {
     setPasswordFocused(true);
-    setEmailFocused(false);
+    setCpfFocused(false);
+  };
+
+  const handleCpfFocus = () => {
+    setCpfFocused(true);
+    setPasswordFocused(false);
   };
 
   const handleBlur = () => {
-    setEmailFocused(false);
     setPasswordFocused(false);
+    setCpfFocused(false);
   };
 
-  const isLogged = useSelector((state: any) => state.user.profile.isLogged);
-  const dispatch = useDispatch();
+  const handleSubmit = async () => {
+    try {
+      setLoading(true);
+      const regexCPF = cpf.replace(/[\.-]/g, "");
+      const userLogged = await authService.login(regexCPF, password);
 
-  const handleSubmit = () => {
-    const emailteste = "Login";
-    const senhateste = "123456";
+      signIn({
+        name: userLogged?.data?.body.fullName,
+        id: userLogged?.data?.access_token, // Access the access_token property from the data object
+      });
 
-    if (email === emailteste && senhateste === password) {
-      signIn({ id: "123", name: "Lucas Grolli de Oliveira" });
       navigate("Home");
-    } else {
-      // setError(!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$i.test(email));
-      setMsgError("E-mail ou senha inválido");
+    } catch (error: any) {
+      setMsgError(error?.message);
       setError(true);
+      setLoading(false);
     }
   };
 
@@ -72,27 +75,23 @@ export function useLogin() {
     setLoading(false);
   };
 
-  useEffect(() => {
-    dispatch({ type: "LOGGED" });
-  });
-
   return {
+    cpf,
     error,
-    email,
+    loading,
     msgError,
     password,
-    loading,
-    emailFocused,
+    cpfFocused,
     passwordFocused,
-    getKeyboardVerticalOffset,
-    setEmail,
-    setPassword,
+    setCpf,
     handleBlur,
-    handlePasswordFocus,
-    handleEmailFocus,
     cleanErrors,
+    setPassword,
     handleSubmit,
+    handleCpfFocus,
     handleTestError,
     onDismissSnackBar,
+    handlePasswordFocus,
+    getKeyboardVerticalOffset,
   };
 }

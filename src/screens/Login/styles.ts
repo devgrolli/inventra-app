@@ -1,6 +1,7 @@
 import { TextInput } from "react-native";
 import styled from "styled-components/native";
 import { Colors } from "@core/constants/colors";
+import { TextInputMask } from "react-native-masked-text";
 
 export interface InputProps {
   hasError?: boolean;
@@ -22,7 +23,20 @@ export const Container = styled.View`
   justify-content: "center";
 `;
 
-export const Input = styled(TextInput)<InputProps>`
+export const Input = styled(TextInput).attrs({
+  autoCapitalize: 'none',
+})<InputProps>`
+  flex: 1;
+  border-radius: 15px;
+  border-color: ${({ hasError, isFocused }: InputProps) =>
+    hasError ? Colors.orange : isFocused ? Colors.blue : Colors.grey};
+  height: 50px;
+  margin: 12px;
+  border-width: 2px;
+  padding: 16px;
+`;
+
+export const InputCpf = styled(TextInputMask)<InputProps>`
   flex: 1;
   border-radius: 15px;
   border-color: ${({ hasError, isFocused }: InputProps) =>

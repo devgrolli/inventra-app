@@ -1,11 +1,12 @@
-import React, {
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
-import { TouchableOpacity, FlatList } from "react-native";
+import React from "react";
+import {
+  TouchableOpacity,
+  FlatList,
+  View,
+  Image,
+  Text,
+  Button,
+} from "react-native";
 import { BottomSheetModal, BottomSheetBackdrop } from "@gorhom/bottom-sheet";
 import { LoadingPage } from "@core/components/LoadingPage";
 import { DataComponent } from "@core/constants/data";
@@ -17,32 +18,44 @@ import { faArrowRightArrowLeft } from "@fortawesome/free-solid-svg-icons/faArrow
 import { faBarcode } from "@fortawesome/free-solid-svg-icons/faBarcode";
 
 import * as S from "./styles";
+import { useStock } from "./useSotck";
+import AlertPage from "@assets/images/alert.png";
 
 export default function Stock() {
-  const [visible, setVisible] = useState(false);
-  const [productSelected, setProductSelected] = useState("");
-  const bottomSheetModalRef = useRef<BottomSheetModal>(null);
-  const snapPoints = useMemo(() => ["25%", "50%"], []);
+  const {
+    products,
+    loading,
+    errorFetch,
+    snapPoints,
+    productSelected,
+    bottomSheetModalRef,
+    getProducts,
+    handlePresentModalPress,
+    handleSheetChanges,
+  } = useStock();
 
-  const handlePresentModalPress = useCallback((item: any) => {
-    setProductSelected(item);
-    bottomSheetModalRef.current?.present();
-  }, []);
-
-  const handleSheetChanges = useCallback((index: number) => {
-    console.log("handleSheetChanges", index);
-  }, []);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setVisible(true);
-    }, 1000);
-
-    return () => clearTimeout(timer);
-  }, [visible]);
-
-  if (!visible) {
+  if (loading) {
     return <LoadingPage />;
+  }
+
+  if (errorFetch) {
+    return (
+      <View style={{ alignItems: "center", justifyContent: "center", flex: 1 }}>
+        <Image
+          source={AlertPage}
+          style={{
+            height: 100,
+            width: 100,
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        />
+        <View style={{ paddingTop: 20 }}>
+          <Text>Ocorreu um erro ao buscar produtos</Text>
+          <Button title="Tentar novamente" onPress={getProducts} />
+        </View>
+      </View>
+    );
   }
 
   const renderRow = ({ item }: any) => (
