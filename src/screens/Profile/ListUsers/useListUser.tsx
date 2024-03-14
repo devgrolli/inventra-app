@@ -41,6 +41,14 @@ export const useListUsers = () => {
     bottomSheetModalRef.current?.present();
   }, []);
 
+  const handleFullNameChange = (text: string) => {
+    setSelectedUser((prevUser) => ({ ...prevUser, fullName: text }));
+  };
+
+  const handleEmailChange = (text: string) => {
+    setSelectedUser((prevUser) => ({ ...prevUser, email: text }));
+  };
+
   return {
     users,
     snapPoints,
@@ -50,5 +58,7 @@ export const useListUsers = () => {
     getAllUsers,
     handleUpdateUser,
     handlePresentModalPress,
+    handleFullNameChange,
+    handleEmailChange,
   };
 };

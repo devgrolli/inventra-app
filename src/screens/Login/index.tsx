@@ -1,43 +1,45 @@
-import React, { useState } from "react";
+import React, { memo } from "react";
 import {
+  Text,
   View,
   Image,
   Platform,
+  Pressable,
   ScrollView,
+  TouchableOpacity,
   KeyboardAvoidingView,
 } from "react-native";
+import Logo from "@assets/images/Login-logo.png";
 import { DSButton } from "@core/components/Button";
 import { Snackbar } from "react-native-paper";
 import { useLogin } from "./useLogin";
 import { Colors } from "@core/constants/colors";
-import Logo from "@assets/images/Login-logo.png";
-import { TextInputMask } from "react-native-masked-text";
-
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import * as S from "./styles";
+import { navigate } from "@core/navigation/navigator";
+import Snack from "@core/components/SnackBar";
 
-export default function Login() {
+const Login = memo(() => {
   const {
     cpf,
     error,
     loading,
-    msgError,
-    password,
-    cpfFocused,
-    passwordFocused,
-    setCpf,
-    handleBlur,
+    focus,
+    snackbar,
+    rightIcon,
+    paddingTop,
+    passwordVisibility,
+    handlePasswordVisibility,
     cleanErrors,
-    setPassword,
-    handleSubmit,
-    handleCpfFocus,
-    handleTestError,
     onDismissSnackBar,
+    handlePasswordChange,
+    handleCpfFocus,
+    handleBlur,
     handlePasswordFocus,
+    handleSubmit,
+    handleCpfChange,
     getKeyboardVerticalOffset,
   } = useLogin();
-
-  const headerHeight = 100;
-  const paddingTop = headerHeight * 0.9;
 
   return (
     <KeyboardAvoidingView
@@ -53,54 +55,104 @@ export default function Login() {
           </S.LabelLogo>
         </View>
 
-        <View style={{ padding: 20 }}>
-          <S.InputCpf
-            type="cpf"
-            value={cpf}
-            onChangeText={(text) => setCpf(text)}
-            placeholder="CPF"
-            hasError={error}
-            isFocused={cpfFocused}
-            onBlur={handleBlur}
-            onFocus={handleCpfFocus}
-            onSubmitEditing={handleSubmit}
-          />
-
-          <S.Input
-            onChangeText={(text) => setPassword(text)}
-            value={password}
-            hasError={error}
-            isFocused={passwordFocused}
-            placeholder="Senha"
-            onBlur={handleBlur}
-            onFocus={handlePasswordFocus}
-            onSubmitEditing={handleSubmit}
-            secureTextEntry
-          />
-
-          <View style={{ alignItems: "center", paddingTop: 10 }}>
-            <DSButton
-              loading={loading}
-              onPress={handleSubmit}
-              name="Entrar"
-              typeButton="primary"
+        <View
+          style={{
+            marginLeft: 30,
+            marginRight: 30,
+            marginTop: 20,
+            marginBottom: 10,
+          }}
+        >
+          <View style={{ paddingBottom: 15 }}>
+            <S.InputCpf
+              type="cpf"
+              value={cpf}
+              onChangeText={handleCpfChange}
+              placeholder="CPF"
+              hasError={error}
+              isFocused={focus.cpf}
+              onBlur={handleBlur}
+              onFocus={handleCpfFocus}
+              onSubmitEditing={handleSubmit}
             />
           </View>
+
+          <S.InputPassowrd hasError={error} isFocused={focus.password}>
+            <S.InputWithEye
+              onBlur={handleBlur}
+              onFocus={handlePasswordFocus}
+              placeholder="Senha"
+              autoCapitalize="none"
+              textContentType="newPassword"
+              secureTextEntry={passwordVisibility}
+              enablesReturnKeyAutomatically
+              onChangeText={handlePasswordChange}
+            />
+            <Pressable onPress={handlePasswordVisibility}>
+              <MaterialCommunityIcons
+                name={rightIcon}
+                size={18}
+                color="#232323"
+              />
+            </Pressable>
+          </S.InputPassowrd>
+
+          <View
+            style={{
+              alignContent: "center",
+              alignItems: "flex-end",
+            }}
+          >
+            <TouchableOpacity onPress={() => null}>
+              <Text style={{ color: Colors.blue }}>Esqueceu a senha?</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+
+        <View style={{ alignItems: "center" }}>
+          <DSButton
+            loading={loading}
+            onPress={handleSubmit}
+            name="Entrar"
+            typeButton="primary"
+          />
+        </View>
+
+        <View
+          style={{
+            marginTop: 20,
+            flexDirection: "row",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Text style={{ color: Colors.greyDark }}>Não possui cadastro? </Text>
+          <TouchableOpacity onPress={() => navigate("SignUp")}>
+            <Text style={{ color: Colors.blue }}>Cadastre-se</Text>
+          </TouchableOpacity>
         </View>
       </ScrollView>
+
+      <Snack
+        color={error ? Colors.orange : Colors.blue}
+        setSnackVisible={onDismissSnackBar}
+        snackVisible={snackbar.visible}
+        errors={snackbar.message}
+        clearErrors={cleanErrors}
+      />
 
       <Snackbar
         style={{
           left: 0,
           right: 0,
           bottom: 0,
-          height: 60,
+          height: "auto",
           borderRadius: 15,
           position: "absolute",
           alignItems: "center",
-          backgroundColor: Colors.orange,
+          backgroundColor: error ? Colors.orange : Colors.blue,
         }}
-        visible={error}
+        visible={snackbar.visible}
         onDismiss={onDismissSnackBar}
         action={{
           label: "Fechar",
@@ -108,8 +160,10 @@ export default function Login() {
           onPress: cleanErrors,
         }}
       >
-        <S.textToast>{msgError}</S.textToast>
+        <S.textToast>{snackbar.message}</S.textToast>
       </Snackbar>
     </KeyboardAvoidingView>
   );
-}
+});
+
+export default Login;

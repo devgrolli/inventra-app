@@ -11,4 +11,15 @@ export const CommonString = {
     headerShown: false,
     gestureEnabled: true,
   },
+  errors: {
+    errorMessagesLogin: ["Network Error", "Request Timeout"],
+    fieldsRequiredRegister: {
+      fullName: "Nome completo é obrigatório.",
+      cpf: "CPF é obrigatório.",
+      birthDate: "Data de Nascimento é obrigtória.",
+      email: "E-mail é obrigatório.",
+      phone: "Telefone é obrigatório.",
+      password: "Senha é obrigatória.",
+    }  
+  }
 };

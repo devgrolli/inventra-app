@@ -23,15 +23,12 @@ export const Container = styled.View`
   justify-content: "center";
 `;
 
-export const Input = styled(TextInput).attrs({
-  autoCapitalize: 'none',
-})<InputProps>`
+export const Input = styled(TextInput)<InputProps>`
   flex: 1;
   border-radius: 15px;
   border-color: ${({ hasError, isFocused }: InputProps) =>
     hasError ? Colors.orange : isFocused ? Colors.blue : Colors.grey};
   height: 50px;
-  margin: 12px;
   border-width: 2px;
   padding: 16px;
 `;
@@ -42,9 +39,26 @@ export const InputCpf = styled(TextInputMask)<InputProps>`
   border-color: ${({ hasError, isFocused }: InputProps) =>
     hasError ? Colors.orange : isFocused ? Colors.blue : Colors.grey};
   height: 50px;
-  margin: 12px;
   border-width: 2px;
   padding: 16px;
+`;
+
+export const InputPassowrd = styled.View<InputProps>`
+  width: 100%;
+  border-radius: 15px;
+  flex-direction: row;
+  align-items: center;
+  border-color: ${({ hasError, isFocused }: InputProps) =>
+    hasError ? Colors.orange : isFocused ? Colors.blue : Colors.grey};
+  height: 50px;
+  border-width: 2px;
+  margin-bottom: 10px;
+`;
+
+export const InputWithEye = styled(TextInput)`
+  padding: 14px;
+  font-size: 16px;
+  width: 90%;
 `;
 
 export const ButtonView = styled.TouchableOpacity`
@@ -82,4 +96,8 @@ export const textToast = styled.Text`
   color: ${Colors.white};
   letter-spacing: 0.5;
   font-weight: 400;
+`;
+
+export const ButtonSingUp = styled.TouchableOpacity`
+
 `;

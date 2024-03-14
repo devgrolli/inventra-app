@@ -4,8 +4,8 @@ import { GlobalNavigation } from "./src/core/navigation/MainContainer";
 import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 
 import { NavigationContainer } from "@react-navigation/native";
-import { navigationRef } from "@core/navigation/navigator"; // Ajuste o caminho conforme necessário
-import { AuthProvider } from "./src/context/AuthContext"; // Atualize o caminho conforme necessário
+import { navigationRef } from "@core/navigation/navigator";
+import { AuthProvider } from "./src/context/AuthContext";
 import { Provider } from "react-redux";
 import store from "./src/redux/store";
 

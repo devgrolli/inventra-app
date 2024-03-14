@@ -1,28 +1,13 @@
 import React from "react";
-import {
-  TouchableOpacity,
-  FlatList,
-  View,
-  Image,
-  Text,
-  Button,
-  TextInput,
-} from "react-native";
+import { TouchableOpacity, FlatList, View, Text } from "react-native";
 import { BottomSheetModal, BottomSheetBackdrop } from "@gorhom/bottom-sheet";
-import { LoadingPage } from "@core/components/LoadingPage";
-import { DataComponent } from "@core/constants/data";
-import { Avatar } from "react-native-elements";
 
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { faArrowRightArrowLeft } from "@fortawesome/free-solid-svg-icons/faArrowRightArrowLeft";
 import { faFloppyDisk } from "@fortawesome/free-solid-svg-icons/faFloppyDisk";
-
 import { Switch } from "react-native-paper";
-// import { Switch } from "react-native-switch";
 
 import * as S from "./styles";
 import { useListUsers } from "./useListUser";
-import AlertPage from "@assets/images/alert.png";
 import { Colors } from "@core/constants/colors";
 
 export default function ListUsers() {
@@ -35,6 +20,8 @@ export default function ListUsers() {
     getAllUsers,
     handleUpdateUser,
     handlePresentModalPress,
+    handleFullNameChange,
+    handleEmailChange,
   } = useListUsers();
 
   const renderRow = ({ item }: any) => (
@@ -87,20 +74,17 @@ export default function ListUsers() {
 
         <View style={{ padding: 20 }}>
           <S.Input
-            onChangeText={(text) =>
-              setSelectedUser({ ...selectedUser, fullName: text })
-            }
+            onChangeText={handleFullNameChange}
             value={selectedUser.fullName}
           />
           <S.Input
-            onChangeText={(text) =>
-              setSelectedUser({ ...selectedUser, email: text })
-            }
+            onChangeText={handleEmailChange}
             value={selectedUser.email}
           />
 
           <View style={{ flexDirection: "row", alignItems: "center" }}>
             <Text>Liberar acesso? </Text>
+
             <Switch
               value={selectedUser.isValidated}
               color={Colors.blue}
