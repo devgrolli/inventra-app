@@ -3,14 +3,13 @@ import { Colors } from "@core/constants/colors";
 import { CommonString } from "@core/constants/strings";
 import { FontAwesome } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import Login from "@screens/Login";
+import { headerStylePrimary, headerStyleSecondary } from "./headerStyles";
 import { useAuth } from "context/AuthContext";
 import { InitialScreen } from "@screens/Initial";
+import { ProfileRoutes } from "./ProfileRoutes";
+import { LoginRoutes } from "./LoginRoutes";
 import Stock from "@screens/Stock";
 import Home from "@screens/Home";
-import { ProfileRoutes } from "./ProfileRoutes";
-import { headerStylePrimary, headerStyleSecondary } from "./headerStyles";
-import { LoginRoutes } from "./LoginRoutes";
 
 const Tab = createBottomTabNavigator();
 const size = CommonString.sizeIcons.footer;

@@ -3,14 +3,13 @@ import { View, TouchableOpacity } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 import { ScrollView } from "react-native-gesture-handler";
 import { Avatar } from "react-native-elements";
-
-import * as S from "./styles";
-import { useAuth } from "context/AuthContext";
-import { Touchable } from "react-native";
 import { navigate } from "@core/navigation/navigator";
+import { useAuth } from "context/AuthContext";
+import * as S from "./styles";
 
 export default function ProfileScreen() {
   const { signOut } = useAuth();
+
   return (
     <ScrollView>
       <S.Container>

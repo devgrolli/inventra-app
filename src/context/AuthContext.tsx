@@ -1,3 +1,4 @@
+import { storage } from "@utils/storage";
 import React, {
   createContext,
   useContext,
@@ -5,10 +6,10 @@ import React, {
   ReactNode,
   Context,
 } from "react";
-
 interface User {
   id: string;
   name: string;
+  cpf: string;
 }
 
 interface AuthContextType {
@@ -31,10 +32,12 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const signIn = async (userData: User) => {
     setUser(userData);
+    await storage.setItem("userInfo", userData);
   };
 
-  const signOut = () => {
+  const signOut = async () => {
     setUser(null);
+    await storage.removeItem("userInfo");
   };
 
   return (

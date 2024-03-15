@@ -51,7 +51,7 @@ const Login = memo(() => {
         <View style={{ alignItems: "center" }}>
           <Image source={Logo} />
           <S.LabelLogo>
-            App <S.Label2> Stock</S.Label2>
+            App <S.Label2>Stock</S.Label2>
           </S.LabelLogo>
         </View>
 
@@ -103,7 +103,7 @@ const Login = memo(() => {
               alignItems: "flex-end",
             }}
           >
-            <TouchableOpacity onPress={() => null}>
+            <TouchableOpacity onPress={() => navigate("ForgotPassword")}>
               <Text style={{ color: Colors.blue }}>Esqueceu a senha?</Text>
             </TouchableOpacity>
           </View>

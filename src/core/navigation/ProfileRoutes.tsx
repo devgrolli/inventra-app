@@ -2,7 +2,6 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Profile from "@screens/Profile";
 import EditProfile from "@screens/Profile/EditProfile";
 import ListUsers from "@screens/Profile/ListUsers";
-import { headerStylePrimary } from "./headerStyles";
 import { CommonString } from "@core/constants/strings";
 
 const Stack = createNativeStackNavigator();

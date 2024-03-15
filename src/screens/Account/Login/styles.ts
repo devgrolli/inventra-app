@@ -97,7 +97,3 @@ export const textToast = styled.Text`
   letter-spacing: 0.5;
   font-weight: 400;
 `;
-
-export const ButtonSingUp = styled.TouchableOpacity`
-
-`;

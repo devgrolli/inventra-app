@@ -1,4 +1,4 @@
-import React, { createRef } from "react";
+import { createRef } from "react";
 import { StackActions, TabActions, NavigationContainerRef, ParamListBase } from "@react-navigation/native";
 
 export const navigationRef = createRef<NavigationContainerRef<ParamListBase>>();
@@ -21,6 +21,10 @@ export function replace(name: string, params?: object) {
 
 export function navigateTab(name: string) {
   navigationRef.current?.dispatch(TabActions.jumpTo(name));
+}
+
+export function goBack() {
+  navigationRef.current?.goBack();
 }
 
 // export function push(...args: any) {

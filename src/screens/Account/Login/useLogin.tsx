@@ -7,9 +7,11 @@ import { getStatusBarHeight } from "react-native-iphone-screen-helper";
 import { CommonString } from "@core/constants/strings";
 import { useAuth } from "context/AuthContext";
 import authService from "services/authService";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { IconName } from "./types";
 import { useRoute } from "@react-navigation/native";
+import { storage } from "@utils/storage";
 // import { useDispatch } from "react-redux";
 // import {
 //   selectState,
@@ -77,14 +79,22 @@ export function useLogin() {
       const regexCPF = cpf?.replace(/[\.-]/g, "");
       const userLogged = await authService.login(regexCPF, password);
 
-      signIn({
-        name: userLogged?.data?.body.fullName,
+      const userInfo = {
         id: userLogged?.data?.access_token,
-      });
+        name: userLogged?.data?.body.fullName,
+        cpf: userLogged?.data?.body.cpf,
+      };
+
+      await signIn(userInfo);
 
       navigate("Home");
     } catch (error: any) {
-      setSnackbar({ visible: true, message: error?.message });
+      setSnackbar({
+        visible: true,
+        message: Array.isArray(error.message)
+          ? error.message[0]
+          : error.message,
+      });
       setError(true);
       setLoading(false);
     }
