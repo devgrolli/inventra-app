@@ -1,4 +1,9 @@
 export const CommonString = {
+  fonts: {
+    openSans: "OpenSans",
+    openSansBold: "OpenSans-Bold",
+    openSansLight: "OpenSans-Light",
+  },
   dimension: {
     searchBarHeight: 100,
     productDetailFooterHeight: 72,

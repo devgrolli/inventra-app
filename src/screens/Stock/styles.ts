@@ -1,5 +1,9 @@
 import styled from "styled-components/native";
 import { Colors } from "@core/constants/colors";
+import { CommonString } from "@core/constants/strings";
+
+const { white, black, blue, orange, greyDark, greyLight } = Colors;
+const { openSansBold } = CommonString.fonts;
 
 export const Container = styled.View`
   margin-top: 20px;
@@ -11,9 +15,9 @@ export const Container = styled.View`
 export const ViewProducts = styled.View`
   width: 100%;
   height: 80px;
-  background-color: ${Colors.white};
+  background-color: ${white};
   border-radius: 15px;
-  shadow-color: ${Colors.black};
+  shadow-color: ${black};
   shadow-offset: 0px 1px;
   shadow-opacity: 0.35;
   flex-direction: row;
@@ -28,8 +32,8 @@ export const ViewProductsHeader = styled.View`
   width: 100%;
   height: 60px;
   border-radius: 15px;
-  background-color: ${Colors.blue};
-  shadow-color: ${Colors.black};
+  background-color: ${blue};
+  shadow-color: ${black};
   shadow-offset: 0px 1px;
   shadow-opacity: 0.35;
   flex-direction: row;
@@ -46,7 +50,7 @@ export const TextProd = styled.Text`
 `;
 
 export const TextProdHeader = styled.Text`
-  color: ${Colors.white};
+  color: ${white};
   font-size: 16px;
   font-family: Verdana;
   font-weight: 400;
@@ -84,13 +88,13 @@ export const ProductQtdSheet = styled.Text`
 `;
 
 export const ButtonProductView = styled.TouchableOpacity`
-  background-color: ${Colors.blue};
+  background-color: ${blue};
   border-radius: 15px;
   height: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
-  shadow-color: ${Colors.black};
+  shadow-color: ${black};
   shadow-offset: 0px 1px;
   shadow-opacity: 0.35;
   flex-direction: row;
@@ -98,13 +102,13 @@ export const ButtonProductView = styled.TouchableOpacity`
 `;
 
 export const ButtonSale = styled.TouchableOpacity`
-  background-color: ${Colors.orange};
+  background-color: ${orange};
   border-radius: 15px;
   height: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
-  shadow-color: ${Colors.black};
+  shadow-color: ${black};
   shadow-offset: 0px 1px;
   shadow-opacity: 0.35px;
   flex-direction: row;
@@ -126,8 +130,8 @@ export const ProductView = styled.View`
 `;
 
 export const HeaderLabelSheet = styled.Text`
-  font-family: "OpenSans_700Bold";
-  color: ${Colors.greyDark};
+  font-family: ${openSansBold};
+  color: ${greyDark};
   font-size: 20px;
   letter-spacing: 0.2px;
 `;
@@ -140,13 +144,13 @@ export const ViewHeadeSheet = styled.View`
 
 export const Separator = styled.View`
   height: 1px;
-  background-color: ${Colors.greyLight};
+  background-color: ${greyLight};
 `;
 
 export const Divider = styled.View`
   height: 2px;
   width: 100%;
   padding-bottom: 10px;
-  background-color: ${Colors.white};
+  background-color: ${white};
   box-shadow: 0px -6px 4px rgba(0, 0, 0, 0.1);
 `;

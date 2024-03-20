@@ -1,5 +1,6 @@
 import styled from "styled-components/native";
 import { Colors } from "@core/constants/colors";
+import { CommonString } from "@core/constants/strings";
 
 export const IconView = styled.View`
   padding-right: 20px;
@@ -19,6 +20,7 @@ export const Badge = styled.View`
 `;
 
 export const TextBadge = styled.Text`
+  font-family: ${CommonString.fonts.openSans};
   font-size: 14px;
   color: white;
   font-weight: bold;

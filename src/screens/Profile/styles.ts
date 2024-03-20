@@ -1,12 +1,16 @@
 import styled from "styled-components/native";
 import { Colors } from "@core/constants/colors";
+import { CommonString } from "@core/constants/strings";
+
+const { white, black } = Colors;
+const { openSans } = CommonString.fonts;
 
 export const ViewConfigures = styled.View`
   height: 400px;
   width: 100%;
-  background-color: ${Colors.white};
+  background-color: ${white};
   border-radius: 20px;
-  shadow-color: ${Colors.black};
+  shadow-color: ${black};
   shadow-offset: 0px 1px;
   shadow-opacity: 0.25;
 `;
@@ -40,18 +44,17 @@ export const ViewLabel = styled.TouchableOpacity`
 `;
 
 export const LabelConfig = styled.Text`
-  color: ${Colors.black};
-  font-family: 'OpenSans_400Regular';
+  color: ${black};
+  font-family: ${openSans};
   letter-spacing: 0.8px;
   font-size: 16px;
-  font-weight: 600;
 `;
 
 export const LabelLink = styled.Text`
   color: #949494;
-  font-family: 'OpenSans_400Regular';
+  font-family: ${openSans};
   letter-spacing: 0.8px;
-  font-weight: 400;
+
 `;
 
 export const AvatarContainer = styled.View`

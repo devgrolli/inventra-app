@@ -7,7 +7,6 @@ import {
   TouchableOpacity,
   TextInput,
   Button,
-  SafeAreaView,
   Text,
   Dimensions,
 } from "react-native";

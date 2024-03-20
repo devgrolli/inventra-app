@@ -2,6 +2,7 @@ import React from "react";
 import { Text } from "react-native";
 import { Colors } from "@core/constants/colors";
 import { Snackbar } from "react-native-paper";
+import { CommonString } from "@core/constants/strings";
 
 const Snack = ({
   color,
@@ -35,7 +36,15 @@ const Snack = ({
       onPress: clearErrors,
     }}
   >
-    <Text style={{ color: Colors.white, letterSpacing: 0.5 }}>{errors}</Text>
+    <Text
+      style={{
+        color: Colors.white,
+        letterSpacing: 0.5,
+        fontFamily: CommonString.fonts.openSans,
+      }}
+    >
+      {errors}
+    </Text>
   </Snackbar>
 );
 

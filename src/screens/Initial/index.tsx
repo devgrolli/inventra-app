@@ -1,9 +1,9 @@
 import React, { useEffect, useRef } from "react";
-import { View, Animated } from "react-native";
 import Initial from "@assets/images/logo-initial.png";
+import { View, Animated } from "react-native";
 import { Colors } from "@core/constants/colors";
-import * as S from "./styles";
 import { navigate } from "@core/navigation/navigator";
+import * as S from "./styles";
 
 export const InitialScreen = () => {
   const headerHeight = 100;
@@ -37,16 +37,16 @@ export const InitialScreen = () => {
       />
 
       <Animated.View style={{ opacity: fadeAnim }}>
-        <S.LabelLogo>
-          App <S.Label2>Stock</S.Label2>
-        </S.LabelLogo>
+        <S.LabelOne>
+          Inven<S.LabelTwo>tra</S.LabelTwo>
+        </S.LabelOne>
       </Animated.View>
 
-      <S.ProductView>
-        <S.ButtonProductView onPress={() => navigate("Login")}>
-          <S.ProductViewText>Entrar</S.ProductViewText>
-        </S.ButtonProductView>
-      </S.ProductView>
+      <S.ContainerButton>
+        <S.Button onPress={() => navigate("Login")}>
+          <S.ButtonText>Entrar</S.ButtonText>
+        </S.Button>
+      </S.ContainerButton>
     </View>
   );
 };

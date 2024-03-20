@@ -1,101 +1,177 @@
-import React, { memo, useState } from "react";
-import {
-  Text,
-  View,
-  Image,
-  Platform,
-  ScrollView,
-  TouchableOpacity,
-  KeyboardAvoidingView,
-  StyleSheet,
-} from "react-native";
+import React, { memo } from "react";
+import { Text, View, Image, ScrollView, StyleSheet } from "react-native";
+import { CodeField, Cursor } from "react-native-confirmation-code-field";
+import { useRecoveryPassword } from "./useRecoveryPassword";
+import { CommonString } from "@core/constants/strings";
 import { DSButton } from "@core/components/Button";
 import { Colors } from "@core/constants/colors";
-import Snack from "@core/components/SnackBar";
-import { goBack } from "@core/navigation/navigator";
-import { CodeField, Cursor } from "react-native-confirmation-code-field";
-import { getPaddingKeyboard } from "@utils/keyboardConfig";
-import { useRecoveryPassword } from "./useRecoveryPassword";
+import InputController from "@core/components/Input/InputController";
+import CountdownTimer from "@core/components/Countdown";
 import padlock from "@assets/images/padlock.png";
+import Snack from "@core/components/SnackBar";
+import { CodeValidationViewProps, NewPasswordViewProps } from "./types";
+import * as S from "./styles";
+
+const CodeValidationView = ({
+  ref,
+  value,
+  styles,
+  expiry,
+  loading,
+  CELL_COUNT,
+  resendMail,
+  onChangeCode,
+  handleTokenPassword,
+  getCellOnLayoutHandler,
+}: CodeValidationViewProps) => (
+  <>
+    <View style={{ paddingTop: 10 }}>
+      <S.Label>Insira o Código</S.Label>
+      <S.SubtitleCode>
+        Um código de 4 dígitos foi enviado para o seu email
+      </S.SubtitleCode>
+    </View>
+    <S.ContainerCode>
+      <CodeField
+        ref={ref}
+        value={value}
+        onChangeText={onChangeCode}
+        cellCount={CELL_COUNT}
+        rootStyle={styles.codeFieldRoot}
+        keyboardType="number-pad"
+        textContentType="oneTimeCode"
+        renderCell={({ index, symbol, isFocused }) => (
+          <Text
+            key={index}
+            style={[styles.cell, isFocused && styles.focusCell]}
+            onLayout={getCellOnLayoutHandler(index)}
+          >
+            {symbol || (isFocused ? <Cursor /> : null)}
+          </Text>
+        )}
+      />
+    </S.ContainerCode>
+
+    {expiry > 0 && (
+      <CountdownTimer expiryTimestamp={expiry} onPress={resendMail} />
+    )}
+
+    <S.CenteredView>
+      <DSButton
+        loading={loading}
+        onPress={handleTokenPassword}
+        name="Validar"
+        typeButton="primary"
+      />
+    </S.CenteredView>
+  </>
+);
+
+const NewPasswordView = ({
+  errors,
+  control,
+  loading,
+  password,
+  handleSubmit,
+  handleNewPassword,
+}: NewPasswordViewProps) => (
+  <>
+    <S.CenteredView>
+      <S.StyledImage source={padlock} />
+    </S.CenteredView>
+
+    <S.PaddedView>
+      <S.Label>Nova senha</S.Label>
+      <S.SubtitleCode>Proteja sua conta com uma senha segura</S.SubtitleCode>
+    </S.PaddedView>
+
+    <S.ContainerInputs>
+      <InputController
+        control={control}
+        name="passwordOne"
+        type="custom"
+        placeholder="Digite uma nova senha"
+        error={errors.passwordOne}
+        msgError={password}
+        secureTextEntry
+      />
+      <InputController
+        control={control}
+        name="passwordTwo"
+        type="custom"
+        placeholder="Repita a senha"
+        error={errors.passwordTwo}
+        msgError={password}
+        secureTextEntry
+      />
+    </S.ContainerInputs>
+
+    <S.CenteredView>
+      <DSButton
+        loading={loading}
+        onPress={handleSubmit(handleNewPassword)}
+        name="Salvar"
+        typeButton="primary"
+      />
+    </S.CenteredView>
+  </>
+);
 
 const RecoveryPassword = memo(() => {
+  const { password } = CommonString.errors.fieldsRequiredRegister;
   const {
     ref,
     value,
-    props,
+    errors,
+    expiry,
+    control,
     loading,
-    CELL_COUNT,
     snackbar,
-    setValue,
+    errorCode,
+    CELL_COUNT,
+    codeValidated,
+    resendMail,
     cleanErrors,
+    onChangeCode,
+    handleSubmit,
+    handleNewPassword,
     onDismissSnackBar,
-    handleSubmitPassword,
+    handleTokenPassword,
     getCellOnLayoutHandler,
   } = useRecoveryPassword();
-
   return (
     <>
-      <ScrollView style={{ flex: 1, paddingTop: getPaddingKeyboard() }}>
-        <View style={{ alignItems: "center" }}>
-          <Image source={padlock} style={{ width: 180, height: 180 }} />
-        </View>
-
-        <View
-          style={{
-            marginLeft: 30,
-            marginRight: 30,
-            marginTop: 20,
-            marginBottom: 10,
-          }}
-        >
-          <View style={{ paddingBottom: 15 }}>
-            <CodeField
-              {...props}
-              ref={ref}
-              value={value}
-              onChangeText={setValue}
-              cellCount={CELL_COUNT}
-              rootStyle={styles.codeFieldRoot}
-              keyboardType="number-pad"
-              textContentType="oneTimeCode"
-              renderCell={({ index, symbol, isFocused }) => (
-                <Text
-                  key={index}
-                  style={[styles.cell, isFocused && styles.focusCell]}
-                  onLayout={getCellOnLayoutHandler(index)}
-                >
-                  {symbol || (isFocused ? <Cursor /> : null)}
-                </Text>
-              )}
-            />
-          </View>
-        </View>
-
-        <View style={{ alignItems: "center" }}>
-          <DSButton
+      <ScrollView style={{ flex: 1, paddingTop: 100 * 0.4 }}>
+        {codeValidated ? (
+          <NewPasswordView
+            control={control}
+            password={password}
+            errors={errors}
+            handleSubmit={handleSubmit}
+            handleNewPassword={handleNewPassword}
             loading={loading}
-            onPress={handleSubmitPassword}
-            name="Enviar"
-            typeButton="primary"
           />
-        </View>
-
-        <View
-          style={{
-            marginTop: 20,
-            flexDirection: "row",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <TouchableOpacity onPress={() => goBack()}>
-            <Text style={{ color: Colors.brown }}>Voltar</Text>
-          </TouchableOpacity>
-        </View>
+        ) : (
+          <CodeValidationView
+            control={control}
+            password={password}
+            errors={errors}
+            ref={ref}
+            value={value}
+            onChangeCode={onChangeCode}
+            CELL_COUNT={CELL_COUNT}
+            getCellOnLayoutHandler={getCellOnLayoutHandler}
+            styles={styles}
+            expiry={expiry}
+            resendMail={resendMail}
+            handleTokenPassword={handleTokenPassword}
+            loading={loading}
+          />
+        )}
       </ScrollView>
 
       <Snack
-        color={Colors.blue}
+        color={errorCode ? Colors.orange : Colors.blue}
         setSnackVisible={onDismissSnackBar}
         snackVisible={snackbar.visible}
         errors={snackbar.message}
@@ -104,6 +180,7 @@ const RecoveryPassword = memo(() => {
     </>
   );
 });
+
 const styles = StyleSheet.create({
   root: { flex: 1, padding: 10 },
   title: { textAlign: "center", fontSize: 30, borderRadius: 30 },
@@ -120,6 +197,7 @@ const styles = StyleSheet.create({
     margin: 15,
   },
   focusCell: {
+    borderWidth: 2,
     borderColor: Colors.blue,
   },
 });

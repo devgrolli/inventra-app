@@ -11,29 +11,14 @@
     "experimentalDecorators": true,
     "baseUrl": "./src",
     "paths": {
-      "@core/*": [
-        "core/*"
-      ],
-      "@utils/*": [
-        "utils/*"
-      ],
-      "@assets/*": [
-        "assets/*"
-      ],
-      "@screens/*": [
-        "screens/*"
-      ],
-      "@service/*": [
-        "service/*"
-      ],
-      "@components/*": [
-        "components/*"
-      ]
+      "@core/*": ["core/*"],
+      "@utils/*": ["utils/*"],
+      "@assets/*": ["assets/*"],
+      "@screens/*": ["screens/*"],
+      "@service/*": ["service/*"],
+      "@components/*": ["components/*"]
     }
   },
-  "include": [
-    "**/*.ts",
-    "**/*.tsx"
-  ],
+  "include": ["**/*.ts", "**/*.tsx", " react-native.config.js"],
   "extends": "expo/tsconfig.base"
 }

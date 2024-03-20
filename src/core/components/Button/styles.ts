@@ -1,20 +1,24 @@
 import styled, { css } from "styled-components/native";
 import { Colors } from "@core/constants/colors";
+import { CommonString } from "@core/constants/strings";
 
 export interface ButtonProps {
   typeButton?: string;
   loading: boolean;
 }
 
+const { brownLoading, brown, blue, orange, orangeLoading, blueLoading, white } = Colors;
+const { openSansBold } = CommonString.fonts;
+
 const getButtonStyles = (typeButton?: string, loading?: boolean) => {
-  let backgroundColor = loading ? Colors.brownLoading : Colors.brown;
+  let backgroundColor = loading ? brownLoading : brown;
 
   switch (typeButton) {
     case "primary":
-      backgroundColor = loading ? Colors.blueLoading : Colors.blue;
+      backgroundColor = loading ? blueLoading : blue;
       break;
     case "secondary":
-      backgroundColor = loading ? Colors.orangeLoading : Colors.orange;
+      backgroundColor = loading ? orangeLoading : orange;
       break;
     default:
       break;
@@ -35,7 +39,8 @@ export const ButtonView = styled.TouchableOpacity<ButtonProps>`
 `;
 
 export const TextButton = styled.Text`
-  color: #ffffff;
+  font-family: ${openSansBold};
+  color: ${white};
   font-size: 16px;
-  font-weight: 800;
+  letter-spacing: 0.7;
 `;

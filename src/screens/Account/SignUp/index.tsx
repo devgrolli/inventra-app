@@ -32,9 +32,9 @@ export default function SignUp() {
       keyboardVerticalOffset={getKeyboardVerticalOffset()}
     >
       <ScrollView style={{ flex: 1, paddingTop }}>
-        <S.LabelLogo>
-          App <S.Label2>Stock</S.Label2>
-        </S.LabelLogo>
+        <S.LabelOne>
+          Inven<S.LabelTwo>tra</S.LabelTwo>
+        </S.LabelOne>
         <View
           style={{
             marginLeft: 30,
@@ -103,7 +103,7 @@ export default function SignUp() {
           />
         </View>
 
-        <View style={{ alignItems: "center" }}>
+        <View style={{ alignItems: "center", paddingBottom: 150 }}>
           <DSButton
             loading={isLoading}
             onPress={handleSubmit(onSubmit)}

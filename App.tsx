@@ -9,21 +9,15 @@ import { AuthProvider } from "./src/context/AuthContext";
 import { Provider } from "react-redux";
 import store from "./src/redux/store";
 
-import {
-  useFonts,
-  OpenSans_400Regular,
-  OpenSans_600SemiBold,
-  OpenSans_700Bold,
-  OpenSans_800ExtraBold,
-} from "@expo-google-fonts/open-sans";
+import loadFonts from "@assets/fontLoader";
+import { useEffect, useState } from "react";
 
 export default function App() {
-  let [fontsLoaded] = useFonts({
-    OpenSans_400Regular,
-    OpenSans_600SemiBold,
-    OpenSans_700Bold,
-    OpenSans_800ExtraBold,
-  });
+  const [fontsLoaded, setFontsLoaded] = useState(false);
+
+  useEffect(() => {
+    loadFonts().then(() => setFontsLoaded(true));
+  }, []);
 
   if (!fontsLoaded) {
     return null;

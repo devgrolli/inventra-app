@@ -2,6 +2,10 @@ import { TextInput } from "react-native";
 import styled from "styled-components/native";
 import { Colors } from "@core/constants/colors";
 import { TextInputMask } from "react-native-masked-text";
+import { CommonString } from "@core/constants/strings";
+
+const { grey, orange, blue, white, brown } = Colors;
+const { openSansBold, openSans } = CommonString.fonts;
 
 export interface InputProps {
   hasError?: boolean;
@@ -27,7 +31,7 @@ export const Input = styled(TextInput)<InputProps>`
   flex: 1;
   border-radius: 15px;
   border-color: ${({ hasError, isFocused }: InputProps) =>
-    hasError ? Colors.orange : isFocused ? Colors.blue : Colors.grey};
+    hasError ? orange : isFocused ? blue : grey};
   height: 50px;
   border-width: 2px;
   padding: 16px;
@@ -37,7 +41,7 @@ export const InputCpf = styled(TextInputMask)<InputProps>`
   flex: 1;
   border-radius: 15px;
   border-color: ${({ hasError, isFocused }: InputProps) =>
-    hasError ? Colors.orange : isFocused ? Colors.blue : Colors.grey};
+    hasError ? orange : isFocused ? blue : grey};
   height: 50px;
   border-width: 2px;
   padding: 16px;
@@ -49,7 +53,7 @@ export const InputPassowrd = styled.View<InputProps>`
   flex-direction: row;
   align-items: center;
   border-color: ${({ hasError, isFocused }: InputProps) =>
-    hasError ? Colors.orange : isFocused ? Colors.blue : Colors.grey};
+    hasError ? orange : isFocused ? blue : grey};
   height: 50px;
   border-width: 2px;
   margin-bottom: 10px;
@@ -65,35 +69,35 @@ export const ButtonView = styled.TouchableOpacity`
   width: 128px;
   height: 50px;
   border-radius: 15px;
-  background-color: ${Colors.blue};
+  background-color: ${blue};
   justify-content: center;
   align-items: center;
 `;
 
 export const TextButton = styled.Text`
-  color: ${Colors.white};
+  font-family: ${openSans};
+  color: ${white};
   font-size: 16px;
-  font-weight: 800;
 `;
 
 export const LabelLogo = styled.Text`
-  color: ${Colors.brown};
+  font-family: ${openSansBold};
+  color: ${brown};
   align-items: center;
   text-align: center;
   font-size: 30px;
-  font-weight: 900;
 `;
 
 export const Label2 = styled.Text`
-  color: ${Colors.blue};
+  font-family: ${openSansBold};
+  color: ${blue};
   align-items: center;
   text-align: center;
   font-size: 30px;
-  font-weight: 900;
 `;
 
 export const textToast = styled.Text`
-  color: ${Colors.white};
+  font-family: ${openSans};
+  color: ${white};
   letter-spacing: 0.5;
-  font-weight: 400;
 `;

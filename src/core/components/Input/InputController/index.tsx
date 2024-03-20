@@ -35,7 +35,7 @@ const InputController = React.memo(
               autoCapitalize="none"
               onChangeText={onChange}
               placeholder={placeholder}
-              {...(name === "password" && { secureTextEntry })}
+              {...(name.includes("password") && { secureTextEntry })}
               error={!!error}
             />
           )

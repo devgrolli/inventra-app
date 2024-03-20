@@ -1,5 +1,15 @@
 import { useRoute } from "@react-navigation/native";
 import { useCallback, useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import {
+  CELL_COUNT,
+  ERROR_MSG,
+  FormData,
+  RecoveryRouteParams,
+  SnackbarState,
+} from "./types";
+import { navigate } from "@core/navigation/navigator";
+import authService from "services/authService";
 import {
   useBlurOnFulfill,
   useClearByFocusCell,
@@ -7,14 +17,15 @@ import {
 
 export function useRecoveryPassword() {
   const route = useRoute();
-  const CELL_COUNT = 4;
+  const [expiry, setExpiry] = useState<number>(0);
   const [value, setValue] = useState("");
-  const [error, setError] = useState(false);
+  const [errorCode, setErrorCode] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [codeValidated, setCodeValidated] = useState(false);
   const ref = useBlurOnFulfill({ value, cellCount: CELL_COUNT });
-  const [snackbar, setSnackbar] = useState({
+  const [snackbar, setSnackbar] = useState<SnackbarState>({
     visible: false,
-    message: "Erro com o código de recuperação",
+    message: ERROR_MSG,
   });
   const [props, getCellOnLayoutHandler] = useClearByFocusCell({
     value,
@@ -22,35 +33,74 @@ export function useRecoveryPassword() {
   });
 
   useEffect(() => {
-    if ((route.params as any)?.emailRecovery) {
+    const params = route.params as RecoveryRouteParams;
+    const { emailRecovery, messageSnack, expiryTime } = params;
+
+    if (emailRecovery) {
+      setExpiry(expiryTime);
       setSnackbar({
-        visible: (route.params as any)?.messageSnack?.visible ?? false,
-        message: (route.params as any)?.messageSnack?.msg ?? "",
+        visible: messageSnack?.visible ?? false,
+        message: messageSnack?.msg ?? "",
       });
     }
   }, [route.params]);
 
-  const handleSubmitPassword = useCallback(async () => {
+  const {
+    control,
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>();
+
+  useEffect(() => {
+    register("passwordOne", { required: true });
+    register("passwordTwo", { required: true });
+  }, [register]);
+
+  const handleError = (error: any) => {
+    setSnackbar({
+      visible: true,
+      message: Array.isArray(error.message) ? error.message[0] : error.message,
+    });
+    setErrorCode(true);
+    setLoading(false);
+  };
+
+  const handleNewPassword = useCallback(
+    async (data: FormData) => {
+      const email = (route.params as RecoveryRouteParams).emailRecovery;
+      const { passwordOne, passwordTwo } = data;
+      setLoading(true);
+
+      if (passwordOne !== passwordTwo) {
+        return handleError({ message: "As senhas não conferem" });
+      }
+
+      try {
+        await authService.updatePassword(value, email, passwordOne);
+        setLoading(false);
+        navigate("Login", { passwordChangedSuccess: true });
+      } catch (error: any) {
+        handleError(error);
+      }
+    },
+    [value, route.params, handleError]
+  );
+
+  const handleTokenPassword = useCallback(async () => {
+    const email = (route.params as RecoveryRouteParams).emailRecovery;
     try {
       setLoading(true);
-      // const forgot = await authService.validateCodePassword(code);
-      // console.log("forgot", forgot.data.message);
-      // setSnackbar({ visible: true, message: forgot?.data?.message });
+      await authService.validateRecoveryCode(email, value);
+      setCodeValidated(true);
       setLoading(false);
     } catch (error: any) {
-      setSnackbar({
-        visible: true,
-        message: Array.isArray(error.message)
-          ? error.message[0]
-          : error.message,
-      });
-      setError(true);
-      setLoading(false);
+      handleError(error);
     }
-  }, []);
+  }, [value]);
 
   const cleanErrors = useCallback(() => {
-    setError(false);
+    setErrorCode(false);
     setLoading(false);
     setSnackbar({ visible: false, message: "" });
   }, []);
@@ -59,17 +109,40 @@ export function useRecoveryPassword() {
     setSnackbar({ visible: false, message: "" });
   }, []);
 
+  const onChangeCode = useCallback((text: string) => {
+    setValue(text.replace(/[^0-9]/g, ""));
+  }, []);
+
+  const resendMail = useCallback(async () => {
+    try {
+      const email = (route.params as RecoveryRouteParams).emailRecovery;
+      const forgot = await authService.forgotPassword(email);
+      const { message, expiryTime } = forgot?.data;
+      setExpiry(expiryTime);
+      setSnackbar({ visible: true, message: message });
+    } catch (error: any) {
+      handleError(error);
+    }
+  }, []);
+
   return {
     ref,
     value,
-    props,
+    errors,
+    expiry,
+    control,
     loading,
-    CELL_COUNT,
     snackbar,
-    setValue,
+    errorCode,
+    CELL_COUNT,
+    codeValidated,
+    resendMail,
     cleanErrors,
+    onChangeCode,
+    handleSubmit,
+    handleNewPassword,
     onDismissSnackBar,
-    handleSubmitPassword,
+    handleTokenPassword,
     getCellOnLayoutHandler,
   };
 }

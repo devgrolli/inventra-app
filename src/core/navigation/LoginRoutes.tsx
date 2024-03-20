@@ -1,14 +1,23 @@
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { CommonString } from "@core/constants/strings";
 import Login from "@screens/Account/Login";
 import SignUp from "@screens/Account/SignUp";
-import ForgotPassword from "@screens/Account/Password/ForgetPassword";
+import ForgotPassword from "@screens/Account/Password/ForgotPassword";
 import RecoveryPassword from "@screens/Account/Password/RecoveryPassword";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { CommonString } from "@core/constants/strings";
+import { CustomHeadeGoBack } from "./customHeader";
 
 const Stack = createNativeStackNavigator();
 
 export const LoginRoutes = () => {
   const optionsHeader = CommonString.optionsHeader;
+
+  const optionHeaderBack = {
+    headerShown: true,
+    gestureEnabled: true,
+    headerTitle: "",
+    headerLeft: () => <CustomHeadeGoBack />,
+  };
+
   return (
     <Stack.Navigator
       screenOptions={{
@@ -23,12 +32,12 @@ export const LoginRoutes = () => {
       <Stack.Screen
         name="ForgotPassword"
         component={ForgotPassword}
-        options={optionsHeader}
+        options={optionHeaderBack}
       />
       <Stack.Screen
         name="RecoveryPassword"
         component={RecoveryPassword}
-        options={optionsHeader}
+        options={optionHeaderBack}
       />
     </Stack.Navigator>
   );

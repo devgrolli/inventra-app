@@ -11,13 +11,12 @@ import {
 } from "react-native";
 import Logo from "@assets/images/Login-logo.png";
 import { DSButton } from "@core/components/Button";
-import { Snackbar } from "react-native-paper";
 import { useLogin } from "./useLogin";
 import { Colors } from "@core/constants/colors";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import * as S from "./styles";
 import { navigate } from "@core/navigation/navigator";
 import Snack from "@core/components/SnackBar";
+import * as S from "./styles";
 
 const Login = memo(() => {
   const {
@@ -51,7 +50,7 @@ const Login = memo(() => {
         <View style={{ alignItems: "center" }}>
           <Image source={Logo} />
           <S.LabelLogo>
-            App <S.Label2>Stock</S.Label2>
+            Inven<S.Label2>tra</S.Label2>
           </S.LabelLogo>
         </View>
 
@@ -140,28 +139,6 @@ const Login = memo(() => {
         errors={snackbar.message}
         clearErrors={cleanErrors}
       />
-
-      <Snackbar
-        style={{
-          left: 0,
-          right: 0,
-          bottom: 0,
-          height: "auto",
-          borderRadius: 15,
-          position: "absolute",
-          alignItems: "center",
-          backgroundColor: error ? Colors.orange : Colors.blue,
-        }}
-        visible={snackbar.visible}
-        onDismiss={onDismissSnackBar}
-        action={{
-          label: "Fechar",
-          textColor: Colors.white,
-          onPress: cleanErrors,
-        }}
-      >
-        <S.textToast>{snackbar.message}</S.textToast>
-      </Snackbar>
     </KeyboardAvoidingView>
   );
 });

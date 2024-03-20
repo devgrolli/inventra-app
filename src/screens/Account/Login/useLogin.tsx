@@ -4,23 +4,15 @@ import React, { useState, useCallback, useEffect } from "react";
 import { navigate } from "@core/navigation/navigator";
 import { Platform } from "react-native";
 import { getStatusBarHeight } from "react-native-iphone-screen-helper";
-import { CommonString } from "@core/constants/strings";
+import { snackMessageRoute } from "@utils/snackMessageRoute";
 import { useAuth } from "context/AuthContext";
-import authService from "services/authService";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { IconName } from "./types";
 import { useRoute } from "@react-navigation/native";
-import { storage } from "@utils/storage";
-// import { useDispatch } from "react-redux";
-// import {
-//   selectState,
-//   setCpf,
-// } from "redux/login/loginActions";
+import { CommonString } from "@core/constants/strings";
+import authService from "services/authService";
 
 export function useLogin() {
-  // const dispatch = useDispatch();
-  // const cpf = selectState("cpf");
   const route = useRoute();
   const { signIn } = useAuth();
 
@@ -40,10 +32,8 @@ export function useLogin() {
   const paddingTop = headerHeight * 0.9;
 
   useEffect(() => {
-    if ((route.params as { signupSuccess?: boolean })?.signupSuccess) {
-      setSnackbar({ visible: true, message: "Cadastro realizado com sucesso" });
-    }
-  }, [(route.params as { signupSuccess?: boolean })?.signupSuccess]);
+    setSnackbar(snackMessageRoute(route));
+  }, [route.params]);
 
   const getKeyboardVerticalOffset = useCallback(() => {
     const statusBarHeight = getStatusBarHeight();
