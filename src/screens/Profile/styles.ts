@@ -18,6 +18,7 @@ export const ViewConfigures = styled.View`
 export const Container = styled.View`
   padding: 15px;
 `;
+
 export const ContainerImage = styled.View`
   flex: 1;
   align-items: "center";
@@ -54,7 +55,6 @@ export const LabelLink = styled.Text`
   color: #949494;
   font-family: ${openSans};
   letter-spacing: 0.8px;
-
 `;
 
 export const AvatarContainer = styled.View`
@@ -70,33 +70,33 @@ export const ViewListItem = styled.View`
   align-items: center;
   padding-left: 20px;
   padding-top: 15px;
-`
+`;
 
 export const Icon = styled.View`
-width: 50px;
-height: 50px;
-background-color: #EDF4FF;
-border-radius: 100px;
-justify-content: center;
-align-items: center;
+  width: 50px;
+  height: 50px;
+  background-color: #edf4ff;
+  border-radius: 100px;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const ContainerList = styled.View`
-width: 100%;
-padding-left: 20px;
-padding-right: 20px;
-margin-top: 30px;
+  width: 100%;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-top: 30px;
 `;
 
 export const TitleList = styled.Text`
-font-size: 16px;
-font-family: ${openSansBold};
-letter-spacing: 0.5;
-color: ${Colors.greyDark};
-`; 
+  font-size: 16px;
+  font-family: ${openSansBold};
+  letter-spacing: 0.5;
+  color: ${Colors.greyDark};
+`;
 export const Access = styled.Text`
-font-size: 14px;
-font-family: ${openSans};
-letter-spacing: 0.5;
-color: ${greyDark};
+  font-size: 14px;
+  font-family: ${openSans};
+  letter-spacing: 0.5;
+  color: ${greyDark};
 `;

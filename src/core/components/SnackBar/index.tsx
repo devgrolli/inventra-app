@@ -5,35 +5,37 @@ import { Snackbar } from "react-native-paper";
 import { CommonString } from "@core/constants/strings";
 
 const Snack = ({
+  bottom = 30,
   color,
-  errors,
+  msg,
   snackVisible,
-  clearErrors,
-  setSnackVisible,
+  onClose,
+  onDismiss,
 }: {
+  bottom?: number;
   color: string;
-  errors: any;
+  msg: any;
   snackVisible: boolean;
-  clearErrors: () => void;
-  setSnackVisible: (visible: boolean) => void;
+  onClose: () => void;
+  onDismiss: (visible: boolean) => void;
 }) => (
   <Snackbar
     style={{
       left: 0,
       right: 0,
-      bottom: 30,
+      bottom: bottom,
       height: "auto",
       borderRadius: 15,
       position: "absolute",
       alignItems: "center",
       backgroundColor: color,
     }}
-    onDismiss={() => setSnackVisible(false)}
+    onDismiss={() => onDismiss(false)}
     visible={snackVisible}
     action={{
       label: "Fechar",
       textColor: Colors.white,
-      onPress: clearErrors,
+      onPress: onClose,
     }}
   >
     <Text
@@ -43,7 +45,7 @@ const Snack = ({
         fontFamily: CommonString.fonts.openSans,
       }}
     >
-      {errors}
+      {msg}
     </Text>
   </Snackbar>
 );

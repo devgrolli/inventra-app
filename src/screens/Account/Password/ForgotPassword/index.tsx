@@ -71,10 +71,10 @@ const ForgotPassword = memo(() => {
 
       <Snack
         color={error ? Colors.orange : Colors.blue}
-        setSnackVisible={onDismissSnackBar}
+        onDismiss={onDismissSnackBar}
         snackVisible={snackbar.visible}
-        errors={snackbar.message}
-        clearErrors={cleanErrors}
+        msg={snackbar.message}
+        onClose={cleanErrors}
       />
     </>
   );

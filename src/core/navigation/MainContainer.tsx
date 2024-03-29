@@ -8,7 +8,6 @@ const Tab = createBottomTabNavigator();
 
 export function GlobalNavigation() {
   const { user } = useAuth();
-
   const routes = user ? authenticatedUserRoutes() : unauthenticatedUserRoutes();
 
   return (

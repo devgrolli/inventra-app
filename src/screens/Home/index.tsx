@@ -1,5 +1,5 @@
-import React, { useEffect, useState, useRef } from "react";
-import { Card } from "@screens/Home/components/Card";
+import React, { useState, useRef } from "react";
+import { Card } from "@screens/Home/Card";
 import {
   View,
   Text,
@@ -9,8 +9,6 @@ import {
   TouchableWithoutFeedback,
 } from "react-native";
 import { DataComponent } from "@core/constants/data";
-import LottieView from "lottie-react-native";
-import Aprove from "@assets/animations/aprove.json";
 
 import { ViewCard, ViewLabel } from "./styles";
 import { useAuth } from "context/AuthContext";

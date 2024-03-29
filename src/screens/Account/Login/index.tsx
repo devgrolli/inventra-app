@@ -134,10 +134,10 @@ const Login = memo(() => {
 
       <Snack
         color={error ? orange : blue}
-        setSnackVisible={onDismissSnackBar}
+        onDismiss={onDismissSnackBar}
         snackVisible={snackbar.visible}
-        errors={snackbar.message}
-        clearErrors={cleanErrors}
+        msg={snackbar.message}
+        onClose={cleanErrors}
       />
     </KeyboardAvoidingView>
   );

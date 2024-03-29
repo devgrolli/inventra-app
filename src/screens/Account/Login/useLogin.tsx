@@ -68,10 +68,13 @@ export function useLogin() {
       const regexCPF = cpf?.replace(/[\.-]/g, "");
       const userLogged = await authService.login(regexCPF, password);
 
+      const { fullName, disableNotify, isValidated } = userLogged?.data?.body;
       const userInfo = {
         id: userLogged?.data?.access_token,
-        name: userLogged?.data?.body.fullName,
         cpf: userLogged?.data?.body.cpf,
+        name: fullName,
+        disableNotify,
+        isValidated,
       };
 
       await signIn(userInfo);

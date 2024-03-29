@@ -10,7 +10,7 @@ import { Switch } from "react-native-paper";
 import { Avatar } from "react-native-elements";
 import { Colors } from "@core/constants/colors";
 import { ErrorList } from "@core/components/Error/List";
-import UserListItem from "./UserListItem";
+import UserItem from "./UserItem";
 import WithoutImgUser from "@assets/images/without-img-user.png";
 import * as S from "./styles";
 
@@ -54,12 +54,12 @@ export default function ListUsers() {
           contentContainerStyle={{
             paddingRight: 15,
             paddingLeft: 15,
-            paddingBottom: 20,
+            paddingBottom: 100,
           }}
           data={users}
           keyExtractor={(item: any) => item.cpf.toString()}
           renderItem={({ item }) => (
-            <UserListItem
+            <UserItem
               item={item}
               onPress={() => handlePresentModalPress(item)}
             />

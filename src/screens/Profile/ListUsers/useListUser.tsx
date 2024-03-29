@@ -15,6 +15,12 @@ export const useListUsers = () => {
     getAllUsers();
   }, []);
 
+  // useEffect(() => {
+  //   if (selectedUser) {
+  //     bottomSheetModalRef.current?.present();
+  //   }
+  // }, [selectedUser]);
+
   const getAllUsers = async () => {
     try {
       const allUsers = await authService.getAllUsers();
@@ -29,16 +35,26 @@ export const useListUsers = () => {
 
   const handleUpdateUser = async (item: any) => {};
 
-  const onChangeDetails = (value: boolean) => {
-    if (selectedUser) {
-      setSelectedUser({ ...selectedUser, isValidated: value });
-    }
-  };
+  const onChangeDetails = useCallback(
+    async (value: boolean) => {
+      if (selectedUser) {
+        setSelectedUser({ ...selectedUser, isValidated: value });
 
-  const handlePresentModalPress = useCallback((item: any) => {
+        try {
+          await authService.updateDisableAccessUser(selectedUser?.cpf, value);
+          await getAllUsers();
+        } catch (error) {
+          console.error("ERROR.updateDisableAccessUser", error);
+        }
+      }
+    },
+    [selectedUser]
+  );
+
+  const handlePresentModalPress = (item: User) => {
     setSelectedUser(item);
     bottomSheetModalRef.current?.present();
-  }, []);
+  };
 
   return {
     users,

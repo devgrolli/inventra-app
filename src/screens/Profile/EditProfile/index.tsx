@@ -1,30 +1,22 @@
+import UploadImage from "@core/components/Upload/Image";
 import React, { useState } from "react";
-import { Button, Image, View } from "react-native";
-import { launchImageLibrary } from "react-native-image-picker";
+import { StyleSheet, Button, Text, Image, View } from "react-native";
 
 export default function EditProfile() {
-  const [photo, setPhoto] = useState(null);
-
-  const handleChoosePhoto = () => {
-    const options = {
-      noData: true,
-    };
-    launchImageLibrary(options, (response) => {
-      if (response.uri) {
-        setPhoto(response);
-      }
-    });
-  };
-
   return (
-    <View>
-      <Button title="Choose Photo" onPress={handleChoosePhoto} />
-      {photo && (
-        <Image
-          source={{ uri: photo.uri }}
-          style={{ width: 300, height: 300 }}
-        />
-      )}
+    <View style={styles.container}>
+      <UploadImage />
+      <Text style={{ marginVertical: 20, fontSize: 16 }}>
+        Welcome, FuzzySid
+      </Text>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+});

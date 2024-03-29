@@ -9,7 +9,7 @@ interface UserListItemProps {
   onPress: () => void;
 }
 
-const UserListItem: React.FC<UserListItemProps> = ({ item, onPress }) => (
+const UserItem: React.FC<UserListItemProps> = ({ item, onPress }) => (
   <TouchableOpacity onPress={onPress}>
     <S.ViewListUsers>
       <S.AvatarContainer>
@@ -36,4 +36,4 @@ const UserListItem: React.FC<UserListItemProps> = ({ item, onPress }) => (
   </TouchableOpacity>
 );
 
-export default UserListItem;
+export default UserItem;

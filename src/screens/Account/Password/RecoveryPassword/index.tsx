@@ -190,10 +190,10 @@ const RecoveryPassword = memo(() => {
 
       <Snack
         color={errorCode ? orange : blue}
-        setSnackVisible={onDismissSnackBar}
+        onDismiss={onDismissSnackBar}
         snackVisible={snackbar.visible}
-        errors={snackbar.message}
-        clearErrors={cleanErrors}
+        msg={snackbar.message}
+        onClose={cleanErrors}
       />
     </>
   );

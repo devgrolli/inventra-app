@@ -17,6 +17,8 @@ const endpoints = {
   validateRecoveryCode: "/auth/validateRecoveryCode",
   updatePassword: "/auth/updatePassword",
   getAllUsers: "/auth/getAllUsers",
+  disableNotify: (cpf: string) => `/auth/${cpf}/disableNotify`,
+  disableAccessUser: (cpf: string) => `/auth/${cpf}/disableAccessUser`,
 };
 
 const validateHasError = (error: any) => {
@@ -109,11 +111,39 @@ const getAllUsers = async () => {
   }
 };
 
+const updateDisableNotify = async (cpf: string, disableNotify: boolean) => {
+  try {
+    const response = await api.patch(endpoints.disableNotify(cpf), {
+      disableNotify
+    });
+    const statusCode = response.status;
+    const data = response.data;
+    return { data, statusCode };
+  } catch (error: any) {
+    throw error?.response?.data;
+  }
+};
+
+const updateDisableAccessUser = async (cpf: string, isValidated: boolean) => {
+  try {
+    const response = await api.patch(endpoints.disableAccessUser(cpf), {
+      isValidated
+    });
+    const statusCode = response.status;
+    const data = response.data;
+    return { data, statusCode };
+  } catch (error: any) {
+    throw error?.response?.data;
+  }
+};
+
 export default {
   login,
   signUp,
   getAllUsers,
   updatePassword,
   forgotPassword,
+  updateDisableNotify,
   validateRecoveryCode,
+  updateDisableAccessUser,
 };

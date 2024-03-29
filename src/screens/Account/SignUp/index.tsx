@@ -115,10 +115,10 @@ export default function SignUp() {
 
       <Snack
         color={orange}
-        setSnackVisible={setSnackVisible}
+        onDismiss={setSnackVisible}
         snackVisible={snackVisible}
-        errors={errors?.generic?.message}
-        clearErrors={clearErrors}
+        msg={errors?.generic?.message}
+        onClose={clearErrors}
       />
     </KeyboardAvoidingView>
   );
