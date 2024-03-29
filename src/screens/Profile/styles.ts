@@ -2,8 +2,8 @@ import styled from "styled-components/native";
 import { Colors } from "@core/constants/colors";
 import { CommonString } from "@core/constants/strings";
 
-const { white, black } = Colors;
-const { openSans } = CommonString.fonts;
+const { white, black, greyDark } = Colors;
+const { openSans, openSansBold } = CommonString.fonts;
 
 export const ViewConfigures = styled.View`
   height: 400px;
@@ -71,3 +71,32 @@ export const ViewListItem = styled.View`
   padding-left: 20px;
   padding-top: 15px;
 `
+
+export const Icon = styled.View`
+width: 50px;
+height: 50px;
+background-color: #EDF4FF;
+border-radius: 100px;
+justify-content: center;
+align-items: center;
+`;
+
+export const ContainerList = styled.View`
+width: 100%;
+padding-left: 20px;
+padding-right: 20px;
+margin-top: 30px;
+`;
+
+export const TitleList = styled.Text`
+font-size: 16px;
+font-family: ${openSansBold};
+letter-spacing: 0.5;
+color: ${Colors.greyDark};
+`; 
+export const Access = styled.Text`
+font-size: 14px;
+font-family: ${openSans};
+letter-spacing: 0.5;
+color: ${greyDark};
+`;

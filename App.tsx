@@ -9,7 +9,7 @@ import { AuthProvider } from "./src/context/AuthContext";
 import { Provider } from "react-redux";
 import store from "./src/redux/store";
 
-import loadFonts from "@assets/fontLoader";
+import { loadFonts } from "@assets/loadFonts";
 import { useEffect, useState } from "react";
 
 export default function App() {

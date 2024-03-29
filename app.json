@@ -7,7 +7,7 @@
     "icon": "./src/assets/images/building.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./src/assets/images/building.png",
+      "image": "./src/assets/images/logo-w-name.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -24,7 +24,7 @@
       }
     },
     "web": {
-      "favicon": "./src/assets/favicon.png"
+      "favicon": "./src/assets/building.png"
     }
   }
 }

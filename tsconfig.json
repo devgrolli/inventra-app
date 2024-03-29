@@ -19,6 +19,6 @@
       "@components/*": ["components/*"]
     }
   },
-  "include": ["**/*.ts", "**/*.tsx", " react-native.config.js"],
+  "include": ["**/*.ts", "./**/*.d.ts", "**/*.tsx", " react-native.config.js"],
   "extends": "expo/tsconfig.base"
 }

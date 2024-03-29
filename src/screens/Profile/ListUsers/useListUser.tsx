@@ -1,15 +1,12 @@
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import authService from "services/authService";
-
-interface User {
-  fullName: string;
-  email: string;
-}
+import { User } from "./type";
 
 export const useListUsers = () => {
   const [users, setUsers] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [errorFetch, setErrorFetch] = useState(false);
   const snapPoints = useMemo(() => ["50%", "75%"], []);
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
@@ -20,45 +17,39 @@ export const useListUsers = () => {
 
   const getAllUsers = async () => {
     try {
-      setLoading(true);
       const allUsers = await authService.getAllUsers();
-      console.log("allUsers", allUsers);
       setUsers(allUsers.data);
-      setLoading(false);
     } catch (error) {
-      console.log("ERROR.getAllUsers", error);
-      // setTimeout(() => {
-      //   setLoading(false);
-      // }, 2000);
-      // setErrorFetch(true);
+      setErrorFetch(true);
+      console.error("ERROR.getAllUsers", error);
+    } finally {
+      setLoading(false);
     }
   };
 
   const handleUpdateUser = async (item: any) => {};
+
+  const onChangeDetails = (value: boolean) => {
+    if (selectedUser) {
+      setSelectedUser({ ...selectedUser, isValidated: value });
+    }
+  };
 
   const handlePresentModalPress = useCallback((item: any) => {
     setSelectedUser(item);
     bottomSheetModalRef.current?.present();
   }, []);
 
-  const handleFullNameChange = (text: string) => {
-    setSelectedUser((prevUser) => ({ ...prevUser, fullName: text }));
-  };
-
-  const handleEmailChange = (text: string) => {
-    setSelectedUser((prevUser) => ({ ...prevUser, email: text }));
-  };
-
   return {
     users,
+    loading,
     snapPoints,
+    errorFetch,
     selectedUser,
     bottomSheetModalRef,
-    setSelectedUser,
     getAllUsers,
+    onChangeDetails,
     handleUpdateUser,
     handlePresentModalPress,
-    handleFullNameChange,
-    handleEmailChange,
   };
 };

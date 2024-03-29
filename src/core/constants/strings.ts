@@ -1,3 +1,5 @@
+import { Colors } from "./colors";
+
 export const CommonString = {
   fonts: {
     openSans: "OpenSans",
@@ -10,11 +12,15 @@ export const CommonString = {
     navigationTitleHeight: 44,
   },
   sizeIcons: {
-    footer: 22
+    footer: 22,
   },
   optionsHeader: {
     headerShown: false,
     gestureEnabled: true,
+  },
+  optionsHeaderBack: {
+    headerStyle: { backgroundColor: Colors.white },
+    headerShadowVisible: false,
   },
   errors: {
     errorMessagesLogin: ["Network Error", "Request Timeout"],
@@ -25,6 +31,6 @@ export const CommonString = {
       email: "E-mail é obrigatório.",
       phone: "Telefone é obrigatório.",
       password: "Senha é obrigatória.",
-    }  
-  }
+    },
+  },
 };

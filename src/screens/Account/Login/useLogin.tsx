@@ -1,4 +1,3 @@
-// import React, { useState, useCallback } from "react";
 import React, { useState, useCallback, useEffect } from "react";
 
 import { navigate } from "@core/navigation/navigator";

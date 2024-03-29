@@ -14,6 +14,8 @@ import Aprove from "@assets/animations/aprove.json";
 
 import { ViewCard, ViewLabel } from "./styles";
 import { useAuth } from "context/AuthContext";
+import { Colors } from "@core/constants/colors";
+import { LoadingPage } from "@core/components/LoadingPage";
 
 interface CardProps {
   img: string;
@@ -49,15 +51,18 @@ const HomeScreen: React.FC = () => {
         key={index}
         size={card.size}
         img={card.img}
-        loading={loading}
         navigateRoute={card.navigateRoute}
         nameLabel={card.nameLabel}
       />
     ));
   };
 
+  if (loading) {
+    return <LoadingPage />;
+  }
+
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1, backgroundColor: Colors.white }}>
       <ScrollView>
         <ViewLabel>
           <Text style={{ fontSize: 20 }}>Guia</Text>
@@ -76,15 +81,6 @@ const HomeScreen: React.FC = () => {
             <Text>Pressione para {expanded ? "Diminuir" : "Aumentar"}</Text>
           </Animated.View>
         </TouchableWithoutFeedback> */}
-
-        {/* <LottieView
-          style={{ width: 200, height: 200 }}
-          source={Aprove}
-          autoPlay={true}
-          resizeMode="contain"
-          loop={true}
-        /> */}
-
         {DataComponent.cardDataHome.map((group: CardGroup, index: number) => (
           <ViewCard key={index}>{renderCards(group)}</ViewCard>
         ))}

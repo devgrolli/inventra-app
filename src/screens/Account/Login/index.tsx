@@ -19,6 +19,7 @@ import Snack from "@core/components/SnackBar";
 import * as S from "./styles";
 
 const Login = memo(() => {
+  const { white, blue, greyDark, orange } = Colors;
   const {
     cpf,
     error,
@@ -26,7 +27,6 @@ const Login = memo(() => {
     focus,
     snackbar,
     rightIcon,
-    paddingTop,
     passwordVisibility,
     handlePasswordVisibility,
     cleanErrors,
@@ -46,7 +46,7 @@ const Login = memo(() => {
       behavior={Platform.OS === "ios" ? "padding" : "height"}
       keyboardVerticalOffset={getKeyboardVerticalOffset()}
     >
-      <ScrollView style={{ flex: 1, paddingTop }}>
+      <ScrollView style={{ flex: 1, backgroundColor: white }}>
         <View style={{ alignItems: "center" }}>
           <Image source={Logo} />
           <S.LabelLogo>
@@ -103,7 +103,7 @@ const Login = memo(() => {
             }}
           >
             <TouchableOpacity onPress={() => navigate("ForgotPassword")}>
-              <Text style={{ color: Colors.blue }}>Esqueceu a senha?</Text>
+              <Text style={{ color: blue }}>Esqueceu a senha?</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -125,15 +125,15 @@ const Login = memo(() => {
             alignItems: "center",
           }}
         >
-          <Text style={{ color: Colors.greyDark }}>Não possui cadastro? </Text>
+          <Text style={{ color: greyDark }}>Não possui cadastro? </Text>
           <TouchableOpacity onPress={() => navigate("SignUp")}>
-            <Text style={{ color: Colors.blue }}>Cadastre-se</Text>
+            <Text style={{ color: blue }}>Cadastre-se</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>
 
       <Snack
-        color={error ? Colors.orange : Colors.blue}
+        color={error ? orange : blue}
         setSnackVisible={onDismissSnackBar}
         snackVisible={snackbar.visible}
         errors={snackbar.message}

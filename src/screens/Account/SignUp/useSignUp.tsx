@@ -11,8 +11,6 @@ export function useSignUp() {
   const [isLoading, setIsLoading] = useState(false);
   const [snackVisible, setSnackVisible] = useState(false);
 
-  const headerHeight = 100;
-  const paddingTop = headerHeight * 0.9;
   const {
     control,
     register,
@@ -69,7 +67,6 @@ export function useSignUp() {
 
   return {
     snackVisible,
-    paddingTop,
     isLoading,
     control,
     errors,

@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  TouchableOpacity,
-  FlatList,
-  View,
-  Image,
-  Text,
-  Button,
-} from "react-native";
+import { TouchableOpacity, FlatList } from "react-native";
 import { BottomSheetModal, BottomSheetBackdrop } from "@gorhom/bottom-sheet";
 import { LoadingPage } from "@core/components/LoadingPage";
 import { DataComponent } from "@core/constants/data";
@@ -19,7 +12,7 @@ import { faBarcode } from "@fortawesome/free-solid-svg-icons/faBarcode";
 
 import * as S from "./styles";
 import { useStock } from "./useSotck";
-import AlertPage from "@assets/images/alert.png";
+import { ErrorList } from "@core/components/Error/List";
 
 export default function Stock() {
   const {
@@ -40,21 +33,10 @@ export default function Stock() {
 
   if (errorFetch) {
     return (
-      <View style={{ alignItems: "center", justifyContent: "center", flex: 1 }}>
-        <Image
-          source={AlertPage}
-          style={{
-            height: 100,
-            width: 100,
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        />
-        <View style={{ paddingTop: 20 }}>
-          <Text>Ocorreu um erro ao buscar produtos</Text>
-          <Button title="Tentar novamente" onPress={getProducts} />
-        </View>
-      </View>
+      <ErrorList
+        onPress={getProducts}
+        textError="Ocorreu um erro ao buscar produtos"
+      />
     );
   }
 

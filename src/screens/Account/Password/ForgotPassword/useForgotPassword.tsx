@@ -1,7 +1,7 @@
 import { useState, useCallback } from "react";
 import { navigate } from "@core/navigation/navigator";
 import authService from "services/authService";
-import { selectState, setExpiryTime } from "redux/password/passwordActions";
+import { setExpiryTime } from "redux/password/passwordActions";
 import { useDispatch } from "react-redux";
 
 export function useForgotPassword() {

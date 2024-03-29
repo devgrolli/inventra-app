@@ -1,5 +1,5 @@
 import React, { memo } from "react";
-import { Text, View, Image, ScrollView, StyleSheet } from "react-native";
+import { Text, View, ScrollView, StyleSheet } from "react-native";
 import { CodeField, Cursor } from "react-native-confirmation-code-field";
 import { useRecoveryPassword } from "./useRecoveryPassword";
 import { CommonString } from "@core/constants/strings";
@@ -9,8 +9,12 @@ import InputController from "@core/components/Input/InputController";
 import CountdownTimer from "@core/components/Countdown";
 import padlock from "@assets/images/padlock.png";
 import Snack from "@core/components/SnackBar";
+import LottieView from "lottie-react-native";
+import Aprove from "@assets/animations/aprove.json";
 import { CodeValidationViewProps, NewPasswordViewProps } from "./types";
 import * as S from "./styles";
+
+const { white, blue, orange, grey } = Colors;
 
 const CodeValidationView = ({
   ref,
@@ -25,7 +29,7 @@ const CodeValidationView = ({
   getCellOnLayoutHandler,
 }: CodeValidationViewProps) => (
   <>
-    <View style={{ paddingTop: 10 }}>
+    <View style={{ paddingTop: 10, backgroundColor: white }}>
       <S.Label>Insira o Código</S.Label>
       <S.SubtitleCode>
         Um código de 4 dígitos foi enviado para o seu email
@@ -63,6 +67,14 @@ const CodeValidationView = ({
         name="Validar"
         typeButton="primary"
       />
+
+      {/* <LottieView
+        style={{ width: 200, height: 200 }}
+        source={Aprove}
+        autoPlay={true}
+        resizeMode="contain"
+        loop={true}
+      /> */}
     </S.CenteredView>
   </>
 );
@@ -141,7 +153,13 @@ const RecoveryPassword = memo(() => {
   } = useRecoveryPassword();
   return (
     <>
-      <ScrollView style={{ flex: 1, paddingTop: 100 * 0.4 }}>
+      <ScrollView
+        style={{
+          flex: 1,
+          paddingTop: 100 * 0.4,
+          backgroundColor: white,
+        }}
+      >
         {codeValidated ? (
           <NewPasswordView
             control={control}
@@ -171,7 +189,7 @@ const RecoveryPassword = memo(() => {
       </ScrollView>
 
       <Snack
-        color={errorCode ? Colors.orange : Colors.blue}
+        color={errorCode ? orange : blue}
         setSnackVisible={onDismissSnackBar}
         snackVisible={snackbar.visible}
         errors={snackbar.message}
@@ -182,23 +200,23 @@ const RecoveryPassword = memo(() => {
 });
 
 const styles = StyleSheet.create({
-  root: { flex: 1, padding: 10 },
+  root: { flex: 1, padding: 0 },
   title: { textAlign: "center", fontSize: 30, borderRadius: 30 },
   codeFieldRoot: { marginTop: 10 },
   cell: {
     width: 50,
-    height: 50,
+    height: 55,
     fontSize: 20,
     lineHeight: 45,
     borderWidth: 1,
     borderRadius: 7,
-    borderColor: Colors.grey,
+    borderColor: grey,
     textAlign: "center",
-    margin: 15,
+    margin: 20,
   },
   focusCell: {
     borderWidth: 2,
-    borderColor: Colors.blue,
+    borderColor: blue,
   },
 });
 

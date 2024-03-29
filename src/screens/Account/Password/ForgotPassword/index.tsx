@@ -25,7 +25,13 @@ const ForgotPassword = memo(() => {
 
   return (
     <>
-      <ScrollView style={{ flex: 1, paddingTop: 100 * 0.4 }}>
+      <ScrollView
+        style={{
+          flex: 1,
+          paddingTop: 100 * 0.4,
+          backgroundColor: Colors.white,
+        }}
+      >
         <View style={{ alignItems: "center" }}>
           <S.LabelLogo>Esqueceu a Senha?</S.LabelLogo>
 
@@ -47,6 +53,8 @@ const ForgotPassword = memo(() => {
               isFocused={focus}
               onBlur={handleBlur}
               onFocus={handleEmailFocus}
+              autoCapitalize="none"
+              autoCorrect={false}
             />
           </View>
         </S.Container>

@@ -11,10 +11,10 @@ import * as S from "./styles";
 export default function SignUp() {
   const { birthDate, cpf, email, fullName, phone, password } =
     CommonString.errors.fieldsRequiredRegister;
+  const { white, orange } = Colors;
 
   const {
     snackVisible,
-    paddingTop,
     isLoading,
     control,
     errors,
@@ -31,7 +31,7 @@ export default function SignUp() {
       behavior={Platform.OS === "ios" ? "padding" : "height"}
       keyboardVerticalOffset={getKeyboardVerticalOffset()}
     >
-      <ScrollView style={{ flex: 1, paddingTop }}>
+      <ScrollView style={{ flex: 1, backgroundColor: white }}>
         <S.LabelOne>
           Inven<S.LabelTwo>tra</S.LabelTwo>
         </S.LabelOne>
@@ -114,7 +114,7 @@ export default function SignUp() {
       </ScrollView>
 
       <Snack
-        color={Colors.orange}
+        color={orange}
         setSnackVisible={setSnackVisible}
         snackVisible={snackVisible}
         errors={errors?.generic?.message}
