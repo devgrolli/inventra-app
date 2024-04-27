@@ -1,6 +1,6 @@
 import UploadImage from "@core/components/Upload/Image";
-import React, { useState } from "react";
-import { StyleSheet, Button, Text, Image, View } from "react-native";
+import React from "react";
+import { StyleSheet, Text, View } from "react-native";
 
 export default function EditProfile() {
   return (

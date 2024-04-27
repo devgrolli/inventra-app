@@ -84,41 +84,55 @@ export const ProductNameSheet = styled.Text`
 
 export const ProductQtdSheet = styled.Text`
   padding-top: 10px;
-  font-size: 16px;
+  padding-right: 10px;
+  font-size: 14px;
+  align-items: center;
+  color: ${greyDark};
 `;
 
 export const ButtonProductView = styled.TouchableOpacity`
-  background-color: ${blue};
-  border-radius: 15px;
+  background-color: ${white};
+  border-color: ${blue};
+  border-width: 1px;
+  border-radius: 10px;
   height: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
-  shadow-color: ${black};
+  /* shadow-color: ${black};
   shadow-offset: 0px 1px;
-  shadow-opacity: 0.35;
+  shadow-opacity: 0.35; */
   flex-direction: row;
   margin-bottom: 10px;
 `;
 
 export const ButtonSale = styled.TouchableOpacity`
-  background-color: ${orange};
-  border-radius: 15px;
+  background-color: ${blue};
+  border-radius: 10px;
   height: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
-  shadow-color: ${black};
+  /* shadow-color: ${black};
   shadow-offset: 0px 1px;
-  shadow-opacity: 0.35px;
+  shadow-opacity: 0.35px; */
   flex-direction: row;
 `;
 
 export const ProductViewText = styled.Text`
-  color: white;
-  font-weight: bold;
-  font-size: 16px;
+  color: ${blue};
+  font-weight: 700;
+  font-size: 14px;
   letter-spacing: 0.8px;
+  padding-right: 10px;
+`;
+
+export const SaleText = styled.Text`
+  color: ${white};
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.8px;
+  padding-right: 10px;
 `;
 
 export const ProductView = styled.View`
@@ -132,14 +146,15 @@ export const ProductView = styled.View`
 export const HeaderLabelSheet = styled.Text`
   font-family: ${openSansBold};
   color: ${greyDark};
-  font-size: 20px;
+  font-size: 16px;
   letter-spacing: 0.2px;
 `;
 
 export const ViewHeadeSheet = styled.View`
   align-items: center;
   width: 100%;
-  padding: 15px;
+  /* margin-top: -20px; */
+  padding-bottom: 15px;
 `;
 
 export const Separator = styled.View`
@@ -153,4 +168,11 @@ export const Divider = styled.View`
   padding-bottom: 10px;
   background-color: ${white};
   box-shadow: 0px -6px 4px rgba(0, 0, 0, 0.1);
+`;
+
+export const Badge = styled.View`
+  background-color: ${orange};
+  border-radius: 10px;
+  padding: 5px 10px;
+  justify-content: center;
 `;

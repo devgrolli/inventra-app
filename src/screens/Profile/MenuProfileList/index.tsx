@@ -1,5 +1,5 @@
 import React, { memo } from "react";
-import { TouchableOpacity } from "react-native";
+import { TouchableOpacity, View } from "react-native";
 import { Switch } from "react-native-paper";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { IconProp } from "@fortawesome/fontawesome-svg-core"; // Importar o tipo para o prop de ícone
@@ -38,15 +38,15 @@ export const MenuProfileList: React.FC<ProfileOptionProps> = memo(
             <S.TitleList>{title}</S.TitleList>
             <S.Access>{access}</S.Access>
           </S.TitleContainer>
-        </S.IconContainer>
 
-        {hasSwitch && (
-          <Switch
-            color={Colors.blue}
-            value={switchValue}
-            onValueChange={onSwitchChange}
-          />
-        )}
+          {hasSwitch && (
+            <Switch
+              color={Colors.blue}
+              value={switchValue}
+              onValueChange={onSwitchChange}
+            />
+          )}
+        </S.IconContainer>
       </S.Container>
     </TouchableOpacity>
   )

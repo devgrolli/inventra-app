@@ -7,24 +7,24 @@ const { openSansBold, openSans } = CommonString.fonts;
 const { greyDark } = Colors;
 
 export const Container = styled(View)`
-  margin-bottom: 25px;
-  align-items: "center";
-  flex-direction: "row";
-  justify-content: "space-between";
+  margin-bottom: 30px;
+  flex-direction: column;
+  justify-content: space-between;
+
 `;
 
 export const IconContainer = styled(View)`
-  flex-direction: "row";
-  align-items: "center";
+  flex-direction: row;
+  align-items: center;
 `;
 
 export const TitleContainer = styled(View)<{ hasSwitch?: boolean }>`
-  margin-left: 15;
+  margin-left: 15px;
   width: ${(props) => (props?.hasSwitch ? "70%" : "90%")};
 `;
 
 export const TitleList = styled.Text`
-  font-size: 16px;
+  font-size: 14px;
   font-family: ${openSansBold};
   letter-spacing: 0.5;
   color: ${greyDark};

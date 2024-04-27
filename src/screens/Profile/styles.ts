@@ -16,13 +16,13 @@ export const ViewConfigures = styled.View`
 `;
 
 export const Container = styled.View`
-  padding: 15px;
+  padding-right: 15px;
 `;
 
 export const ContainerImage = styled.View`
   flex: 1;
-  align-items: "center";
-  justify-content: "center";
+  align-items: center;
+  justify-content: center;
 `;
 
 export const Separator = styled.View`
@@ -40,7 +40,7 @@ export const Button = styled.TouchableOpacity`
 `;
 
 export const ViewLabel = styled.TouchableOpacity`
-  flex-direction: "row";
+  flex-direction: row;
   align-items: "center";
 `;
 

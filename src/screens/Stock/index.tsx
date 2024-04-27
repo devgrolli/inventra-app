@@ -1,18 +1,16 @@
 import React from "react";
-import { TouchableOpacity, FlatList } from "react-native";
+import { TouchableOpacity, FlatList, View, Text } from "react-native";
 import { BottomSheetModal, BottomSheetBackdrop } from "@gorhom/bottom-sheet";
 import { LoadingPage } from "@core/components/LoadingPage";
 import { DataComponent } from "@core/constants/data";
 import { Avatar } from "react-native-elements";
 import { Colors } from "@core/constants/colors";
-
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { faArrowRightArrowLeft } from "@fortawesome/free-solid-svg-icons/faArrowRightArrowLeft";
-import { faBarcode } from "@fortawesome/free-solid-svg-icons/faBarcode";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
-import * as S from "./styles";
-import { useStock } from "./useSotck";
 import { ErrorList } from "@core/components/Error/List";
+import { useStock } from "./useSotck";
+import * as S from "./styles";
 
 export default function Stock() {
   const {
@@ -83,11 +81,13 @@ export default function Stock() {
         enableDismissOnClose={true}
         onChange={handleSheetChanges}
       >
-        {/* <TouchableOpacity
-          onPress={() => bottomSheetModalRef.current?.collapse()}
-        >
-          <FontAwesomeIcon icon={faXmark} size={25} />
-        </TouchableOpacity> */}
+        <View style={{ alignItems: "flex-end", paddingRight: 20 }}>
+          <TouchableOpacity
+            onPress={() => bottomSheetModalRef.current?.dismiss()}
+          >
+            <FontAwesomeIcon icon={faXmark} color={Colors.grey} size={20} />
+          </TouchableOpacity>
+        </View>
         <S.ViewHeadeSheet>
           <S.HeaderLabelSheet>Detalhes do Produto</S.HeaderLabelSheet>
         </S.ViewHeadeSheet>
@@ -104,7 +104,10 @@ export default function Stock() {
           <S.ViewProductSheet>
             <S.ProductNameSheet>{productSelected.name}</S.ProductNameSheet>
             <S.ProductQtdSheet>
-              Em estoque {productSelected.qtd}
+              Estoque
+              <S.Badge>
+                <Text style={{ color: "white" }}>{productSelected.qtd}</Text>
+              </S.Badge>
             </S.ProductQtdSheet>
           </S.ViewProductSheet>
         </S.ViewContextSheet>
@@ -113,23 +116,25 @@ export default function Stock() {
         <S.ProductView>
           <S.ButtonProductView>
             <S.ProductViewText>Adicionar Estoque</S.ProductViewText>
-            <FontAwesomeIcon
-              icon={faArrowRightArrowLeft}
+
+            {/* <FontAwesomeIcon
+              icon={faPlus}
               color={Colors.white}
               style={{ marginLeft: 10 }}
               size={20}
-            />
+            /> */}
+
             {/* <FontAwesome name="bars" size={20} color={Colors.white} /> */}
           </S.ButtonProductView>
 
           <S.ButtonSale>
-            <S.ProductViewText>Vender</S.ProductViewText>
-            <FontAwesomeIcon
+            <S.SaleText>Vender</S.SaleText>
+            {/* <FontAwesomeIcon
               icon={faBarcode}
               color={Colors.white}
               style={{ marginLeft: 10 }}
               size={20}
-            />
+            /> */}
             {/* <FontAwesome name="bars" size={20} color={Colors.white} /> */}
           </S.ButtonSale>
         </S.ProductView>

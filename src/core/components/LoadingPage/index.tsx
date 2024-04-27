@@ -1,17 +1,35 @@
+import { View } from "react-native";
 import React from "react";
-import { View, Image } from "react-native";
-import spinnerGif from "@assets/images/ballSpinner.gif"; // Certifique-se de que o caminho está correto
+import LottieView from "lottie-react-native";
+import box3D from "@assets/animations/box3d.json";
 
 export const LoadingPage = () => {
   return (
     <View
       style={{
         flex: 1,
-        justifyContent: "center",
         alignItems: "center",
+        justifyContent: "center",
       }}
     >
-      <Image source={spinnerGif} style={{ width: 180, height: 180 }} />
+      <View
+        style={{
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <LottieView
+          style={{
+            width: 400,
+            height: 400,
+          }}
+          source={box3D}
+          autoPlay
+          resizeMode="contain"
+          loop
+          speed={3}
+        />
+      </View>
     </View>
   );
 };

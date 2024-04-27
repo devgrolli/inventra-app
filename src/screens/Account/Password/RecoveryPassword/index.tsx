@@ -9,8 +9,6 @@ import InputController from "@core/components/Input/InputController";
 import CountdownTimer from "@core/components/Countdown";
 import padlock from "@assets/images/padlock.png";
 import Snack from "@core/components/SnackBar";
-import LottieView from "lottie-react-native";
-import Aprove from "@assets/animations/aprove.json";
 import { CodeValidationViewProps, NewPasswordViewProps } from "./types";
 import * as S from "./styles";
 
@@ -67,14 +65,6 @@ const CodeValidationView = ({
         name="Validar"
         typeButton="primary"
       />
-
-      {/* <LottieView
-        style={{ width: 200, height: 200 }}
-        source={Aprove}
-        autoPlay={true}
-        resizeMode="contain"
-        loop={true}
-      /> */}
     </S.CenteredView>
   </>
 );

@@ -2,12 +2,22 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
 import serviceProduct from "../../services/productService";
 
+interface ProductSelectProps {
+  imageUrl: string;
+  name: string;
+  qtd: string;
+}
+
 export const useStock = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [errorFetch, setErrorFetch] = useState(false);
   const [visible, setVisible] = useState(false);
-  const [productSelected, setProductSelected] = useState("");
+  const [productSelected, setProductSelected] = useState<ProductSelectProps>({
+    imageUrl: "",
+    name: "",
+    qtd: "",
+  });
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
   const snapPoints = useMemo(() => ["25%", "50%"], []);
 

@@ -1,5 +1,5 @@
 import React from "react";
-import { TouchableOpacity, FlatList, View, Text } from "react-native";
+import { FlatList, View } from "react-native";
 import { BottomSheetModal, BottomSheetBackdrop } from "@gorhom/bottom-sheet";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { LoadingPage } from "@core/components/LoadingPage";
@@ -10,8 +10,8 @@ import { Switch } from "react-native-paper";
 import { Avatar } from "react-native-elements";
 import { Colors } from "@core/constants/colors";
 import { ErrorList } from "@core/components/Error/List";
-import UserItem from "./UserItem";
 import WithoutImgUser from "@assets/images/without-img-user.png";
+import UserItem from "./UserItem";
 import * as S from "./styles";
 
 export default function ListUsers() {
@@ -45,9 +45,7 @@ export default function ListUsers() {
     <View>
       <S.Container>
         <S.ViewProductsHeader>
-          <S.TextHeader>Nome</S.TextHeader>
-          <S.TextHeader>E-mail</S.TextHeader>
-          <S.TextHeader> </S.TextHeader>
+          <S.TextHeader>Gerenciador de Acessos</S.TextHeader>
         </S.ViewProductsHeader>
 
         <FlatList
@@ -120,25 +118,25 @@ export default function ListUsers() {
                   size={25}
                 />
               </S.Icon>
-              <View style={{ marginLeft: 15 }}>
+              <View style={{ marginLeft: 15, width: "65%" }}>
                 <S.TitleList>Acesso ao App</S.TitleList>
                 <S.Access>Libere acesso ao usuário no aplicativo</S.Access>
               </View>
 
               <Switch
                 color={Colors.blue}
-                style={{ marginLeft: 10 }}
+                style={{ marginLeft: 10, marginRight: 10 }}
                 value={selectedUser?.isValidated}
                 onValueChange={onChangeDetails}
               />
             </View>
           </S.ContainerList>
 
-          <S.ContainerSave>
+          {/* <S.ContainerSave>
             <S.ButtonSaveView onPress={handleUpdateUser}>
               <S.ButtonSaveText>Salvar</S.ButtonSaveText>
             </S.ButtonSaveView>
-          </S.ContainerSave>
+          </S.ContainerSave> */}
         </BottomSheetModal>
       </S.Container>
     </View>
