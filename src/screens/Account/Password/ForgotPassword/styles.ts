@@ -3,7 +3,7 @@ import { TextInput } from "react-native";
 import { Colors } from "@core/constants/colors";
 import styled from "styled-components/native";
 
-const { blue, grey, orange, backLight } = Colors;
+const { primary, grey, orange, backLight } = Colors;
 const { openSansBold, openSans } = CommonString.fonts;
 
 export interface InputProps {
@@ -12,17 +12,15 @@ export interface InputProps {
 }
 
 export const Container = styled.View`
-  margin-left: 30px;
-  margin-right: 30px;
   margin-top: 20px;
   margin-bottom: 10px;
 `;
 
 export const Input = styled(TextInput)<InputProps>`
   flex: 1;
-  border-radius: 15px;
+  border-radius: 10px;
   border-color: ${({ hasError, isFocused }: InputProps) =>
-    hasError ? orange : isFocused ? blue : grey};
+    hasError ? orange : isFocused ? primary : grey};
   height: 50px;
   border-width: 2px;
   padding-left: 16px;

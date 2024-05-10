@@ -13,7 +13,7 @@ export interface InputProps {
 const baseInputStyle = (Component: any) => styled(Component)<InputProps>`
   font-family: ${openSans};
   flex: 1;
-  border-radius: 15px;
+  border-radius: 10px;
   border-color: ${({ error }: InputProps) => (error ? orange : grey)};
   height: 50px;
   border-width: 2px;
@@ -23,7 +23,6 @@ const baseInputStyle = (Component: any) => styled(Component)<InputProps>`
 
 export const Input = baseInputStyle(TextInput);
 export const InputMask = baseInputStyle(TextInputMask);
-
 
 export const TextError = styled.Text`
   font-family: ${openSans};

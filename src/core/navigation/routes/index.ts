@@ -29,7 +29,7 @@ const {
   RECOVERY_PASSWORD,
 } = ROUTE_NAMES;
 
-export const authenticatedUserRoutes = () => [
+export const authenticatedUserRoutes = [
   {
     name: HOME,
     component: Home,
@@ -47,7 +47,7 @@ export const authenticatedUserRoutes = () => [
   },
 ];
 
-export const unauthenticatedUserRoutes = () => [
+export const unauthenticatedUserRoutes = [
   {
     name: INITIAL,
     component: InitialScreen,
@@ -62,8 +62,8 @@ export const unauthenticatedUserRoutes = () => [
 
 export const profileRoutes = () => [
   { name: "Profile", component: Profile, options: buttonOptionBack() },
-  { name: "EditProfile", component: EditProfile, options: buttonOptionBack() },
   { name: "ListUsers", component: ListUsers, options: buttonOptionBack() },
+  { name: "EditProfile", component: EditProfile, options: buttonOptionBack() },
 ];
 
 export const accountRoutes = () => [

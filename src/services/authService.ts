@@ -17,6 +17,7 @@ const endpoints = {
   validateRecoveryCode: "/auth/validateRecoveryCode",
   updatePassword: "/auth/updatePassword",
   getAllUsers: "/auth/getAllUsers",
+  validateToken: "/auth/validateToken",
   disableNotify: (cpf: string) => `/auth/${cpf}/disableNotify`,
   disableAccessUser: (cpf: string) => `/auth/${cpf}/disableAccessUser`,
 };
@@ -137,10 +138,20 @@ const updateDisableAccessUser = async (cpf: string, isValidated: boolean) => {
   }
 };
 
+const validateToken = async (token: string) => {
+  try {
+    const response = await api.post(endpoints.validateToken, { token });
+    return response?.data;
+  } catch (error: any) {
+    validateHasError(error);
+  }
+};
+
 export default {
   login,
   signUp,
   getAllUsers,
+  validateToken,
   updatePassword,
   forgotPassword,
   updateDisableNotify,

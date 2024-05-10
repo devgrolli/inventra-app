@@ -2,12 +2,12 @@ import styled from "styled-components/native";
 import { Colors } from "@core/constants/colors";
 import { CommonString } from "@core/constants/strings";
 
-const { orange, orangeLight, black, blue } = Colors;
+const { orange, orangeLight, black, primary } = Colors;
 const { openSansBold } = CommonString.fonts;
 
 export const Button = styled.TouchableOpacity`
-  background-color: ${blue};
-  border-radius: 15px;
+  background-color: ${primary};
+  border-radius: 10px;
   height: 50px;
   justify-content: center;
   align-items: center;
@@ -33,7 +33,7 @@ export const ContainerButton = styled.View`
 
 export const LabelOne = styled.Text`
   padding-top: 20px;
-  color: ${blue};
+  color: ${primary};
   align-items: center;
   text-align: center;
   font-size: 70px;

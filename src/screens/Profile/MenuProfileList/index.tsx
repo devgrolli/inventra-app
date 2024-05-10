@@ -32,16 +32,16 @@ export const MenuProfileList: React.FC<ProfileOptionProps> = memo(
       <S.Container>
         <S.IconContainer>
           <S.Icon>
-            <FontAwesomeIcon icon={icon} color={Colors.blue} size={25} />
+            <FontAwesomeIcon icon={icon} color={Colors.primary} size={25} />
           </S.Icon>
           <S.TitleContainer hasSwitch={hasSwitch}>
             <S.TitleList>{title}</S.TitleList>
-            <S.Access>{access}</S.Access>
+            {access && <S.Access>{access}</S.Access>}
           </S.TitleContainer>
 
           {hasSwitch && (
             <Switch
-              color={Colors.blue}
+              color={Colors.primary}
               value={switchValue}
               onValueChange={onSwitchChange}
             />

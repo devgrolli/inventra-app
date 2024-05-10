@@ -17,7 +17,7 @@ export const headerStylePrimary = (namePage: string, icon: string) => {
   return {
     tabBarLabel: namePage,
     headerStyle: DataComponent.header.primary,
-    headerTintColor: Colors.blue,
+    headerTintColor: Colors.primary,
     headerShown: true,
     tabBarIcon: ({ color }: any) => renderTabBarIcon(icon, color),
     headerLeft: () => <ButtonUser />,

@@ -19,7 +19,7 @@ import Snack from "@core/components/SnackBar";
 import * as S from "./styles";
 
 const Login = memo(() => {
-  const { white, blue, greyDark, orange } = Colors;
+  const { white, primary, greyDark, orange } = Colors;
   const {
     cpf,
     error,
@@ -59,7 +59,6 @@ const Login = memo(() => {
             marginLeft: 30,
             marginRight: 30,
             marginTop: 20,
-            marginBottom: 10,
           }}
         >
           <View style={{ paddingBottom: 15 }}>
@@ -103,37 +102,38 @@ const Login = memo(() => {
             }}
           >
             <TouchableOpacity onPress={() => navigate("ForgotPassword")}>
-              <Text style={{ color: blue }}>Esqueceu a senha?</Text>
+              <Text style={{ color: primary }}>Esqueceu a senha?</Text>
             </TouchableOpacity>
           </View>
-        </View>
 
-        <View style={{ alignItems: "center" }}>
-          <DSButton
-            loading={loading}
-            onPress={handleSubmit}
-            name="Entrar"
-            typeButton="primary"
-          />
+          <View style={{ paddingTop: 20 }}>
+            <DSButton
+              loading={loading}
+              onPress={handleSubmit}
+              name="Entrar"
+              typeButton="primary"
+              widthFull
+            />
+          </View>
         </View>
 
         <View
           style={{
-            marginTop: 20,
             flexDirection: "row",
             justifyContent: "center",
             alignItems: "center",
+            paddingTop: 15,
           }}
         >
           <Text style={{ color: greyDark }}>Não possui cadastro? </Text>
           <TouchableOpacity onPress={() => navigate("SignUp")}>
-            <Text style={{ color: blue }}>Cadastre-se</Text>
+            <Text style={{ color: primary }}>Cadastre-se</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>
 
       <Snack
-        color={error ? orange : blue}
+        color={error ? orange : primary}
         onDismiss={onDismissSnackBar}
         snackVisible={snackbar.visible}
         msg={snackbar.message}

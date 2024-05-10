@@ -4,7 +4,7 @@ import { Colors } from "@core/constants/colors";
 import { TextInputMask } from "react-native-masked-text";
 import { CommonString } from "@core/constants/strings";
 
-const { grey, orange, blue, white, brown } = Colors;
+const { grey, orange, orangeLight, primary, white } = Colors;
 const { openSansBold, openSans } = CommonString.fonts;
 
 export interface InputProps {
@@ -27,21 +27,11 @@ export const Container = styled.View`
   justify-content: "center";
 `;
 
-export const Input = styled(TextInput)<InputProps>`
-  flex: 1;
-  border-radius: 15px;
-  border-color: ${({ hasError, isFocused }: InputProps) =>
-    hasError ? orange : isFocused ? blue : grey};
-  height: 50px;
-  border-width: 2px;
-  padding: 16px;
-`;
-
 export const InputCpf = styled(TextInputMask)<InputProps>`
   flex: 1;
-  border-radius: 15px;
+  border-radius: 10px;
   border-color: ${({ hasError, isFocused }: InputProps) =>
-    hasError ? orange : isFocused ? blue : grey};
+    hasError ? orange : isFocused ? primary : grey};
   height: 50px;
   border-width: 2px;
   padding: 16px;
@@ -49,11 +39,11 @@ export const InputCpf = styled(TextInputMask)<InputProps>`
 
 export const InputPassowrd = styled.View<InputProps>`
   width: 100%;
-  border-radius: 15px;
+  border-radius: 10px;
   flex-direction: row;
   align-items: center;
   border-color: ${({ hasError, isFocused }: InputProps) =>
-    hasError ? orange : isFocused ? blue : grey};
+    hasError ? orange : isFocused ? primary : grey};
   height: 50px;
   border-width: 2px;
   margin-bottom: 10px;
@@ -69,7 +59,7 @@ export const ButtonView = styled.TouchableOpacity`
   width: 128px;
   height: 50px;
   border-radius: 15px;
-  background-color: ${blue};
+  background-color: ${primary};
   justify-content: center;
   align-items: center;
 `;
@@ -82,7 +72,7 @@ export const TextButton = styled.Text`
 
 export const LabelLogo = styled.Text`
   font-family: ${openSansBold};
-  color: ${brown};
+  color: ${primary};
   align-items: center;
   text-align: center;
   font-size: 30px;
@@ -90,7 +80,7 @@ export const LabelLogo = styled.Text`
 
 export const Label2 = styled.Text`
   font-family: ${openSansBold};
-  color: ${blue};
+  color: ${orangeLight};
   align-items: center;
   text-align: center;
   font-size: 30px;

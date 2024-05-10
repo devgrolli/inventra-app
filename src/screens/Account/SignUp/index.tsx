@@ -28,7 +28,7 @@ export default function SignUp() {
   return (
     <KeyboardAvoidingView
       style={{ flex: 1 }}
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      // behavior={Platform.OS === "ios" ? "padding" : "height"}
       keyboardVerticalOffset={getKeyboardVerticalOffset()}
     >
       <ScrollView style={{ flex: 1, backgroundColor: white }}>
@@ -101,14 +101,13 @@ export default function SignUp() {
             msgError={password}
             secureTextEntry
           />
-        </View>
 
-        <View style={{ alignItems: "center", paddingBottom: 150 }}>
           <DSButton
             loading={isLoading}
             onPress={handleSubmit(onSubmit)}
             name="Cadastrar"
             typeButton="primary"
+            widthFull
           />
         </View>
       </ScrollView>

@@ -3,7 +3,7 @@ import { TextInput } from "react-native";
 import { Colors } from "@core/constants/colors";
 import { CommonString } from "@core/constants/strings";
 
-const { white, black, blue, orange, greyDark, greyLight, grey } = Colors;
+const { white, black, primary, orange, greyDark, greyLight, grey } = Colors;
 const { openSansBold, openSans } = CommonString.fonts;
 
 interface BadgeProps {
@@ -37,7 +37,7 @@ export const ViewProductsHeader = styled.View`
   width: 100%;
   height: 50px;
   border-radius: 15px;
-  background-color: ${blue};
+  background-color: ${primary};
   shadow-color: ${black};
   shadow-offset: 0px 1px;
   shadow-opacity: 0.35;
@@ -62,7 +62,7 @@ export const usersName = styled(usersEmail)`
 `;
 
 export const viewer = styled(usersEmail)`
-  color: ${blue};
+  color: ${primary};
   font-family: ${openSansBold};
 `;
 
@@ -81,7 +81,7 @@ export const AvatarContainer = styled.View`
 `;
 
 export const ButtonSaveView = styled.TouchableOpacity`
-  background-color: ${blue};
+  background-color: ${primary};
   border-radius: 15px;
   height: 50px;
   display: flex;
@@ -149,7 +149,7 @@ export const Access = styled.Text`
 
 export const Badge = styled.View<BadgeProps>`
   background-color: ${({ typeColor }: BadgeProps) =>
-    typeColor ? blue : orange};
+    typeColor ? primary : orange};
   border-radius: 10px;
   margin-top: 10px;
   width: 40%;

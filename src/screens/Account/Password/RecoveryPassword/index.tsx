@@ -12,7 +12,7 @@ import Snack from "@core/components/SnackBar";
 import { CodeValidationViewProps, NewPasswordViewProps } from "./types";
 import * as S from "./styles";
 
-const { white, blue, orange, grey } = Colors;
+const { white, primary, orange, grey } = Colors;
 
 const CodeValidationView = ({
   ref,
@@ -27,7 +27,7 @@ const CodeValidationView = ({
   getCellOnLayoutHandler,
 }: CodeValidationViewProps) => (
   <>
-    <View style={{ paddingTop: 10, backgroundColor: white }}>
+    <View style={{ backgroundColor: white }}>
       <S.Label>Insira o Código</S.Label>
       <S.SubtitleCode>
         Um código de 4 dígitos foi enviado para o seu email
@@ -179,7 +179,7 @@ const RecoveryPassword = memo(() => {
       </ScrollView>
 
       <Snack
-        color={errorCode ? orange : blue}
+        color={errorCode ? orange : primary}
         onDismiss={onDismissSnackBar}
         snackVisible={snackbar.visible}
         msg={snackbar.message}
@@ -192,21 +192,27 @@ const RecoveryPassword = memo(() => {
 const styles = StyleSheet.create({
   root: { flex: 1, padding: 0 },
   title: { textAlign: "center", fontSize: 30, borderRadius: 30 },
-  codeFieldRoot: { marginTop: 10 },
+  codeFieldRoot: {
+    marginTop: 10,
+    width: 260,
+    marginLeft: "auto",
+    marginRight: "auto",
+  },
   cell: {
     width: 50,
     height: 55,
-    fontSize: 20,
-    lineHeight: 45,
+    fontSize: 18,
+    lineHeight: 50,
     borderWidth: 1,
     borderRadius: 7,
     borderColor: grey,
     textAlign: "center",
-    margin: 20,
+    marginTop: 15,
+    marginBottom: 20,
   },
   focusCell: {
     borderWidth: 2,
-    borderColor: blue,
+    borderColor: primary,
   },
 });
 

@@ -1,5 +1,5 @@
 export const Colors = {
-  blue: "#80B3FF",
+  primary: "#80B3FF",
   white: "#ffffff",
   grey: "#ADADAD",
   greyLight: "#EDEDED",
@@ -9,7 +9,14 @@ export const Colors = {
   brown: "#6B312D",
   black: "#000000",
   backLight: "#353231",
-  blueLoading: "#BCD4F8",
+  primaryLoading: "#BCD4F8",
   orangeLoading: "#FF957A",
   brownLoading: "#B48481",
 };
+
+export const ColorsDark = {
+  root: "#312F32",
+  primary: "#80B3FF",
+  secundary: "#fd5025",
+  background: "#312F32",
+}

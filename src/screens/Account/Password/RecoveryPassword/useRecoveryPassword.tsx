@@ -87,11 +87,18 @@ export function useRecoveryPassword() {
     [value, route.params, handleError]
   );
 
+  const handleClearSnack = useCallback(() => {
+    setSnackbar({ visible: false, message: "" });
+  }, []);
+
   const handleTokenPassword = useCallback(async () => {
     const email = (route.params as RecoveryRouteParams).emailRecovery;
     try {
       setLoading(true);
       await authService.validateRecoveryCode(email, value);
+      if (errorCode) {
+        handleClearSnack();
+      }
       setCodeValidated(true);
       setLoading(false);
     } catch (error: any) {
@@ -102,11 +109,11 @@ export function useRecoveryPassword() {
   const cleanErrors = useCallback(() => {
     setErrorCode(false);
     setLoading(false);
-    setSnackbar({ visible: false, message: "" });
+    handleClearSnack();
   }, []);
 
   const onDismissSnackBar = useCallback(() => {
-    setSnackbar({ visible: false, message: "" });
+    handleClearSnack();
   }, []);
 
   const onChangeCode = useCallback((text: string) => {

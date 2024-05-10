@@ -23,7 +23,7 @@ export const CommonString = {
     headerShadowVisible: false,
   },
   errors: {
-    errorMessagesLogin: ["Network Error", "Request Timeout"],
+    errorMessagesLogin: ["Network Error", "Request Timeout", "timeout of 7000ms exceeded"],
     fieldsRequiredRegister: {
       fullName: "Nome completo é obrigatório.",
       cpf: "CPF é obrigatório.",

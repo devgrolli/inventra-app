@@ -1,35 +1,55 @@
-import React, { useState, useRef } from "react";
-import { Card } from "@screens/Home/Card";
-import {
-  View,
-  Text,
-  ScrollView,
-  Image,
-  Animated,
-  TouchableWithoutFeedback,
-} from "react-native";
+import React, { useState, useRef, useCallback } from "react";
+import { Animated, RefreshControl, ScrollView, Text, View } from "react-native";
 import { DataComponent } from "@core/constants/data";
-
-import { ViewCard, ViewLabel } from "./styles";
-import { useAuth } from "context/AuthContext";
+import {
+  ViewCircles,
+  Root,
+  ViewListCards,
+  ViewLabel,
+  LabelSales,
+  LabelSalesValue,
+  ViewList,
+  LabelInList,
+  NumberInList,
+  InnerView,
+  IconLabelView,
+  Divider,
+} from "./styles";
+import { Circule } from "@core/components/Cicule";
+import { CirculeGroup } from "./types";
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { faUsers, faInbox } from "@fortawesome/free-solid-svg-icons";
 import { Colors } from "@core/constants/colors";
-import { LoadingPage } from "@core/components/LoadingPage";
+import { IconProp } from "@fortawesome/fontawesome-svg-core";
+import Skeleton from "@core/components/Skeleton";
 
-interface CardProps {
-  img: string;
-  navigateRoute: string;
-  nameLabel: string;
-  size?: number;
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "redux/home/homeTypes";
+import { setLoading } from "redux/home/homeActions";
+
+interface ListViewProps {
+  icon: IconProp;
+  label: string;
+  number?: string;
 }
 
-type CardGroup = CardProps[];
-
 const HomeScreen: React.FC = () => {
-  const [loading, setLoading] = useState<boolean>(false);
+  const dispatch = useDispatch();
+  const loading = useSelector((state: RootState) => state.home.loading);
   const [expanded, setExpanded] = useState(false);
-  const { user, signOut } = useAuth();
-
   const animationHeight = useRef(new Animated.Value(100)).current;
+  const [refreshing, setRefreshing] = useState(false);
+
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+    dispatch(setLoading(true));
+
+    setTimeout(() => {
+      setRefreshing(false);
+
+      dispatch(setLoading(false));
+    }, 2000);
+  }, []);
 
   const toggleAnimation = () => {
     const finalValue = expanded ? 100 : 200;
@@ -43,28 +63,97 @@ const HomeScreen: React.FC = () => {
     setExpanded(!expanded);
   };
 
-  const renderCards = (cards: CardGroup) => {
-    return cards.map((card, index) => (
-      <Card
+  const renderCircules = (circules: CirculeGroup) => {
+    return circules.map((circule, index) => (
+      <Circule
         key={index}
-        size={card.size}
-        img={card.img}
-        navigateRoute={card.navigateRoute}
-        nameLabel={card.nameLabel}
+        size={circule.size}
+        img={circule.img}
+        navigateRoute={circule.navigateRoute}
+        nameLabel={circule.nameLabel}
+        loading={loading}
       />
     ));
   };
 
-  if (loading) {
-    return <LoadingPage />;
-  }
+  const ListView = ({ icon, label, number }: ListViewProps) => {
+    return loading ? (
+      <ViewList>
+        <Skeleton
+          widthFull
+          height={50}
+          borderRadius={10}
+          backgroundColor={Colors.white}
+        />
+      </ViewList>
+    ) : (
+      <ViewList>
+        <InnerView>
+          <IconLabelView>
+            <FontAwesomeIcon icon={icon} color={Colors.black} size={20} />
+            <LabelInList>{label}</LabelInList>
+          </IconLabelView>
+          {number && <NumberInList>{number}</NumberInList>}
+        </InnerView>
+      </ViewList>
+    );
+  };
+
+  const TotalSales = () => {
+    return loading ? (
+      <>
+        <Skeleton
+          width={65}
+          height={20}
+          borderRadius={5}
+          backgroundColor={Colors.white}
+        />
+        <View style={{ paddingTop: 10, paddingBottom: 10 }}>
+          <Skeleton
+            width={90}
+            height={20}
+            borderRadius={5}
+            backgroundColor={Colors.white}
+          />
+        </View>
+      </>
+    ) : (
+      <>
+        <LabelSales>Vendas</LabelSales>
+        <LabelSalesValue>R$ 1.000,00</LabelSalesValue>
+      </>
+    );
+  };
 
   return (
-    <View style={{ flex: 1, backgroundColor: Colors.white }}>
-      <ScrollView>
+    <Root>
+      <ScrollView
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
+      >
         <ViewLabel>
-          <Text style={{ fontSize: 20 }}>Guia</Text>
+          <TotalSales />
         </ViewLabel>
+
+        <ScrollView
+          horizontal={true}
+          showsHorizontalScrollIndicator={false}
+          style={{ marginLeft: 10, paddingTop: 10 }}
+        >
+          {DataComponent.cardDataHome.map(
+            (group: CirculeGroup, index: number) => (
+              <ViewCircles key={index}>{renderCircules(group)}</ViewCircles>
+            )
+          )}
+          <View style={{ width: 15 }} />
+        </ScrollView>
+
+        <ListView icon={faUsers} label="Clientes" number="0" />
+
+        <ListView icon={faInbox} label="Fazer Pedido" />
+
+        <Divider top={10} bottom={15} />
 
         {/* <TouchableWithoutFeedback onPress={toggleAnimation}>
           <Animated.View
@@ -79,11 +168,13 @@ const HomeScreen: React.FC = () => {
             <Text>Pressione para {expanded ? "Diminuir" : "Aumentar"}</Text>
           </Animated.View>
         </TouchableWithoutFeedback> */}
-        {DataComponent.cardDataHome.map((group: CardGroup, index: number) => (
-          <ViewCard key={index}>{renderCards(group)}</ViewCard>
-        ))}
+        {/* <ViewListCards>
+          {DataComponent.cardDataHome.map((group: CardGroup, index: number) => (
+            <ViewCard key={index}>{renderCards(group)}</ViewCard>
+          ))}
+        </ViewListCards> */}
       </ScrollView>
-    </View>
+    </Root>
   );
 };
 

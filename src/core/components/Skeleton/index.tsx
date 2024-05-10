@@ -3,11 +3,12 @@ import React, { useEffect, useState } from "react";
 import { View, StyleSheet, Animated } from "react-native";
 
 interface SkeletonProps {
-  width: number | string;
+  width?: number | string;
   height: number | string;
   borderRadius?: number;
   backgroundColor?: string;
   highlightColor?: string;
+  widthFull?: boolean;
 }
 
 const Skeleton: React.FC<SkeletonProps> = ({
@@ -16,6 +17,7 @@ const Skeleton: React.FC<SkeletonProps> = ({
   borderRadius = 0,
   backgroundColor = "#E1E9EE",
   highlightColor = Colors.greyLight,
+  widthFull,
 }) => {
   const [animation] = useState(new Animated.Value(0));
 
@@ -45,7 +47,7 @@ const Skeleton: React.FC<SkeletonProps> = ({
       style={[
         styles.skeleton,
         {
-          width: Number(width),
+          width: widthFull ? "100%" : Number(width),
           height: Number(height),
           borderRadius,
           backgroundColor: colorAnimation,

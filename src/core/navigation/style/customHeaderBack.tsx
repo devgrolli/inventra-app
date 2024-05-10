@@ -7,15 +7,17 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import { goBack } from "../navigator";
 
 export const CustomHeaderBack = () => {
-  const { blue } = Colors;
+  const { primary } = Colors;
   return (
     <View style={{ flexDirection: "row", alignItems: "center" }}>
       <TouchableOpacity
         onPress={() => goBack()}
         style={{ flexDirection: "row", alignItems: "center" }}
       >
-        <FontAwesomeIcon icon={faChevronLeft} color={blue} size={16} />
-        <Text style={{ fontSize: 16, marginLeft: 0, color: blue }}>Voltar</Text>
+        <FontAwesomeIcon icon={faChevronLeft} color={primary} size={16} />
+        <Text style={{ fontSize: 16, marginLeft: 0, color: primary }}>
+          Voltar
+        </Text>
       </TouchableOpacity>
     </View>
   );

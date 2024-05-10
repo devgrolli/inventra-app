@@ -2,7 +2,7 @@ import styled from "styled-components/native";
 import { Colors } from "@core/constants/colors";
 import { CommonString } from "@core/constants/strings";
 
-const { white, black, blue, orange, greyDark, greyLight } = Colors;
+const { white, black, primary, orange, greyDark, greyLight } = Colors;
 const { openSansBold } = CommonString.fonts;
 
 export const Container = styled.View`
@@ -32,7 +32,7 @@ export const ViewProductsHeader = styled.View`
   width: 100%;
   height: 60px;
   border-radius: 15px;
-  background-color: ${blue};
+  background-color: ${primary};
   shadow-color: ${black};
   shadow-offset: 0px 1px;
   shadow-opacity: 0.35;
@@ -92,7 +92,7 @@ export const ProductQtdSheet = styled.Text`
 
 export const ButtonProductView = styled.TouchableOpacity`
   background-color: ${white};
-  border-color: ${blue};
+  border-color: ${primary};
   border-width: 1px;
   border-radius: 10px;
   height: 50px;
@@ -107,7 +107,7 @@ export const ButtonProductView = styled.TouchableOpacity`
 `;
 
 export const ButtonSale = styled.TouchableOpacity`
-  background-color: ${blue};
+  background-color: ${primary};
   border-radius: 10px;
   height: 50px;
   display: flex;
@@ -120,7 +120,7 @@ export const ButtonSale = styled.TouchableOpacity`
 `;
 
 export const ProductViewText = styled.Text`
-  color: ${blue};
+  color: ${primary};
   font-weight: 700;
   font-size: 14px;
   letter-spacing: 0.8px;

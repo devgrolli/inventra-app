@@ -93,7 +93,7 @@ export default function ListUsers() {
               rounded
               source={WithoutImgUser}
               containerStyle={{
-                shadowColor: Colors.blue,
+                shadowColor: Colors.primary,
                 shadowOffset: { width: 0, height: 5 },
                 shadowOpacity: 0.3,
               }}
@@ -114,7 +114,7 @@ export default function ListUsers() {
               <S.Icon>
                 <FontAwesomeIcon
                   icon={selectedUser?.isValidated ? faLockOpen : faLock}
-                  color={Colors.blue}
+                  color={Colors.primary}
                   size={25}
                 />
               </S.Icon>
@@ -124,7 +124,7 @@ export default function ListUsers() {
               </View>
 
               <Switch
-                color={Colors.blue}
+                color={Colors.primary}
                 style={{ marginLeft: 10, marginRight: 10 }}
                 value={selectedUser?.isValidated}
                 onValueChange={onChangeDetails}

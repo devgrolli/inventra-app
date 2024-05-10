@@ -5,9 +5,10 @@ import { CommonString } from "@core/constants/strings";
 export interface ButtonProps {
   typeButton?: string;
   loading: boolean;
+  widthFull?: boolean;
 }
 
-const { brownLoading, brown, blue, orange, orangeLoading, blueLoading, white } = Colors;
+const { brownLoading, brown, primary, orange, orangeLoading, primaryLoading, white } = Colors;
 const { openSansBold } = CommonString.fonts;
 
 const getButtonStyles = (typeButton?: string, loading?: boolean) => {
@@ -15,7 +16,7 @@ const getButtonStyles = (typeButton?: string, loading?: boolean) => {
 
   switch (typeButton) {
     case "primary":
-      backgroundColor = loading ? blueLoading : blue;
+      backgroundColor = loading ? primaryLoading : primary;
       break;
     case "secondary":
       backgroundColor = loading ? orangeLoading : orange;
@@ -30,7 +31,7 @@ const getButtonStyles = (typeButton?: string, loading?: boolean) => {
 };
 
 export const ButtonView = styled.TouchableOpacity<ButtonProps>`
-  width: 128px;
+  width: ${(props) => (props.widthFull ? "100%" : '128px')};
   height: 50px;
   border-radius: 10px;
   justify-content: center;

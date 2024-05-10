@@ -78,8 +78,6 @@ export function useLogin() {
       };
 
       await signIn(userInfo);
-
-      navigate("Home");
     } catch (error: any) {
       setSnackbar({
         visible: true,

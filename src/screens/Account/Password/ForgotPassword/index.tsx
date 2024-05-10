@@ -30,15 +30,17 @@ const ForgotPassword = memo(() => {
           flex: 1,
           paddingTop: 100 * 0.4,
           backgroundColor: Colors.white,
+          paddingLeft: 30,
+          paddingRight: 30,
         }}
       >
         <View style={{ alignItems: "center" }}>
           <S.LabelLogo>Esqueceu a Senha?</S.LabelLogo>
 
-          <View style={{ marginTop: 10, width: "90%" }}>
+          <View style={{ marginTop: 10, width: "100%" }}>
             <S.SubTitle>
-              Digite o e-mail da sua conta e em instantes, receberá o código
-              para recuperar a senha.
+              Digite abaixo o e-mail da sua conta e em instantes receberá o
+              código para recuperar a senha.
             </S.SubTitle>
           </View>
         </View>
@@ -59,18 +61,17 @@ const ForgotPassword = memo(() => {
           </View>
         </S.Container>
 
-        <View style={{ alignItems: "center" }}>
-          <DSButton
-            loading={loading}
-            onPress={handleSubmit}
-            name="Enviar"
-            typeButton="primary"
-          />
-        </View>
+        <DSButton
+          loading={loading}
+          onPress={handleSubmit}
+          name="Enviar"
+          typeButton="primary"
+          widthFull
+        />
       </ScrollView>
 
       <Snack
-        color={error ? Colors.orange : Colors.blue}
+        color={error ? Colors.orange : Colors.primary}
         onDismiss={onDismissSnackBar}
         snackVisible={snackbar.visible}
         msg={snackbar.message}

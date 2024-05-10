@@ -1,20 +1,36 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { TouchableOpacity, View } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 import { navigate } from "@core/navigation/navigator";
-import { useAuth } from "context/AuthContext";
-import * as S from "./styles";
-import Skeleton from "@core/components/Skeleton";
 import { Colors } from "@core/constants/colors";
+import { storage } from "@utils/storage";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "redux/home/homeTypes";
+import { setLoading } from "redux/home/homeActions";
+import Skeleton from "@core/components/Skeleton";
+import * as S from "./styles";
 
 interface User {
   name: string;
 }
 
 const ButtonUser = () => {
-  const { user } = useAuth();
+  const dispatch = useDispatch();
+  const loading = useSelector((state: RootState) => state.home.loading);
+  const [user, setUser] = useState<User | null>(null);
   const getFirstName = (user: User | null) => user?.name?.split(" ")[0];
-  const loading = user === null;
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const user = JSON.parse(await storage.getItem("userInfo"));
+      if (user?.id) {
+        dispatch(setLoading(false));
+        setUser(user);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <TouchableOpacity onPress={() => navigate("Home")}>
@@ -24,7 +40,7 @@ const ButtonUser = () => {
             width={50}
             height={50}
             borderRadius={100}
-            backgroundColor={Colors.blueLoading}
+            backgroundColor={Colors.primaryLoading}
           />
         </View>
       ) : (
@@ -37,8 +53,8 @@ const ButtonUser = () => {
           <Skeleton
             width={120}
             height={20}
-            borderRadius={10}
-            backgroundColor={Colors.blueLoading}
+            borderRadius={5}
+            backgroundColor={Colors.primaryLoading}
           />
         ) : (
           <S.TextUser>Olá, {getFirstName(user)}</S.TextUser>

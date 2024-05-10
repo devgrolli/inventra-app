@@ -89,7 +89,7 @@ export default function ProfileScreen() {
 
       <Snack
         bottom={0}
-        color={Colors.blue}
+        color={Colors.primary}
         snackVisible={onNotify}
         msg="As notificações foram habilitadas"
         onDismiss={() => setOnNofify(false)}
